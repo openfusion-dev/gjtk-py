@@ -1,4 +1,0 @@
-gjtk-py
-=======
-
-GeoJSON ToolKit
