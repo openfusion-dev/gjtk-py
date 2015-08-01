@@ -8,213 +8,194 @@ import numbers
 
 
 def isGeoJSON(x):
-    """Verify a dictionary is a valid GeoJSON object."""
-    if not isinstance(x, dict):
-        return False
-    return isGeometry(x) or is_feature(x) or is_feature_collection(x)
+    """ Validate a GeoJSON object. """
+    return (
+        isGeometry(x) or
+        isFeature(x) or
+        isFeatureCollection(x)
+    )
 
 
 def isGeometry(x):
-    """Verify a dictionary is a valid GeoJSON Geometry object."""
-    if not isinstance(x, dict):
-        return False
-    if 'type' in x.keys():
-        if x['type'] == 'GeometryCollection':
-            return isGeometryCollection(x)
-        if x['type'] == 'Point':
-            return isPosition(x['coordinates'])
-        if x['type'] == 'MultiPoint':
-            return isMultiPoint(x['coordinates'])
-        if x['type'] == 'LineString':
-            return isLineString(x['coordinates'])
-        if x['type'] == 'MultiLineString':
-            return isMultiLineString(x['coordinates'])
-        if x['type'] == 'Polygon':
-            return isPolygon(x['coordinates'])
-        if x['type'] == 'MultiPolygon':
-            return isMultiPolygon(x['coordinates'])
-    return False
+    """ Validate a GeoJSON Geometry. """
+    return (
+        isPoint(x) or
+        isMultiPoint(x) or
+        isLineString(x) or
+        isMultiLineString(x) or
+        isPolygon(x) or
+        isMultiPolygon(x) or
+        isGeometryCollection(x)
+    )
 
 
 def isPosition(x):
-    """Verify a list or tuple is a valid GeoJSON Position."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    for n in x:
-        if not isinstance(n, numbers.Number):
-            return False
-    return True
+    """ Validate a GeoJSON Position. """
+    return (
+        len(x) > 1 and
+        all(isinstance(n, numbers.Number) for n in x)
+    )
 
 
 def isPointCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON Point. """
+    return isPosition(x)
 
 
 def isMultiPointCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON MultiPoint. """
+    return all(isPosition(position) for position in x)
 
 
 def isLineStringCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON LineString. """
+    return (
+        len(x) > 1 and
+        isMultiPointCoordinates(x)
+    )
 
 
 def isLinearRingCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON LinearRing. """
+    return (
+        len(x) > 3 and
+        isLineStringCoordinates(x) and
+        equalPositions(x[0],x[len(x)-1])
+    )
 
 
 def isMultiLineStringCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON MultiLineString. """
+    return all(isLineStringCoordinates(line_string_coords) for line_string_coords in x)
 
 
 def isPolygonCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON Polygon. """
+    prev = None
+    for linear_ring in x:
+        if not isLinearRingCoordinates(linear_ring):
+            return False
+        if prev is not None and not containedPolygon(linear_ring, prev)
+            return False
+        prev = linear_ring
+    return True
 
 
 def isMultiPolygonCoordinates(x):
-    raise NotImplementedError()
+    """ Validate the coordinates of a GeoJSON MultiPolygon. """
+    return all(isPolygonCoordinates(polygon_coords) for polygon_coords in x)
 
 
 def isPoint(x):
-    raise NotImplementedError()
+    """ Validate a GeoJSON Point. """
+    return (
+        x is not None and
+        x['type'] == 'Point' and
+        isPointCoordinates(x['coordinates']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isMultiPoint(x):
-    """Verify a list or tuple is a valid GeoJSON MultiPoint."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    for point in x:
-        if not isPosition(point):
-            return False
-    return True
+    """ Validate a GeoJSON MultiPoint. """
+    return (
+        x is not None and
+        x['type'] == 'MultiPoint' and
+        isMultiPointCoordinates(x['coordinates']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isLineString(x):
-    """Verify a list or tuple is a valid GeoJSON LineString."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    if len(x) < 2:
-        return False
-    return isMultiPoint(x)
-
-
-def is_linear_ring(x):
-    """Verify a list or tuple is a valid GeoJSON LinearRing."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    if len(x) < 4:
-        return False
-    if not isLineString(x):
-        return False
-    return equalPositions(x[0], x[len(x)-1])
+    """ Validate a GeoJSON LineString. """
+    return (
+        x is not None and
+        x['type'] == 'LineString' and
+        isLineStringCoordinates(x['coordinates']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isMultiLineString(x):
-    """Verify a list or tuple is a valid GeoJSON MultiLineString."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    for line_string in x:
-        if not isLineString(line_string):
-            return False
-    return True
+    """ Validate a GeoJSON MultiLineString. """
+    return (
+        x is not None and
+        x['type'] == 'MultiLineString' and
+        isMultiLineStringCoordinates(['coordinates']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isPolygon(x):
-    """Verify a list or tuple is a valid GeoJSON Polygon."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    for linear_ring in x:
-        if not is_linear_ring(linear_ring):
-            return False
-    # TODO Verify subsequent rings are contained within previous ones.
-    return True
+    """ Validate a GeoJSON Polygon. """
+    return (
+        x is not None and
+        x['type'] == 'Polygon' and
+        isPolygonCoordinates(x.coordinates) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isMultiPolygon(x):
-    """Verify a list or tuple is a valid GeoJSON MultiPolygon."""
-    if not isinstance(x, list) and not isinstance(x, tuple):
-        return False
-    for polygon in x:
-        if not isPolygon(polygon):
-            return False
-    return True
+    """ Validate a GeoJSON MultiPolygon. """
+    return (
+        x is not None and
+        x['type'] == 'MultiPolygon' and
+        isMultiPolygonCoordinates(x['coordinates']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
 def isGeometryCollection(x):
-    """Verify a dictionary is a valid GeoJSON GeometryCollection object."""
-    if not isinstance(x, dict):
-        return False
-    if 'type' in x.keys() and x['type'] == 'GeometryCollection' and 'geometries' in x.keys():
-        for geometry in x['geometries']:
-            if not isGeometry(geometry):
-                return False
-        return True
-    return False
+    """ Validate a GeoJSON GeometryCollection. """
+    return (
+        x is not None and
+        x['type'] == 'GeometryCollection' and
+        all(isGeometry(geometry) for geometry in x['geometries']) and
+        hasCRS(x) and
+        hasBbox(x)
+    )
 
 
-def is_feature(x):
-    """Verify a dictionary is a valid GeoJSON Feature object."""
-    if not isinstance(x, dict):
-        return False
-    if 'type' in x.keys():
-        return \
-            x['type'] == 'Feature' and \
-            'geometry' in x.keys() and \
-            isGeometry(x['geometry']) and \
-            'properties' in x.keys()
-    return False
+def isFeature(x):
+    """ Validate a GeoJSON Feature. """
+    return (
+        x is not None and
+        x['type'] == 'Feature' and
+        gjtk.hasCRS(x) &&
+        gjtk.hasBbox(x) &&
+        (
+            x['geometry'] == None or
+            isGeometry(x['geometry'])
+        )
+    )
 
 
-def is_feature_collection(x):
-    """Verify a dictionary is a valid GeoJSON FeatureCollection object."""
-    if not isinstance(x, dict):
-        return False
-    if 'type' in x.keys() and x['type'] == 'FeatureCollection' and 'features' in x.keys():
-        for feature in x['features']:
-            if not is_feature(feature):
-                return False
-        return True
-    return False
+def isFeatureCollection(x):
+    """ Validate a GeoJSON FeatureCollection. """
+    return (
+        x is not None and
+        x['type'] == 'FeatureCollection' and
+        all(isFeature(feature) for feature in x['features']) and
+        hasCRS(x) and
+        hasBbox(x)
+    );
 
 
 ##################################################################### COMPARISON
 
 
 def equalPositions(a, b):
-    """Check 2 GeoJSON Positions for equality."""
-    if not isPosition(a) or not isPosition(b):
-        return False
-    if len(a) != len(b):
-        return False
-    for i in range(len(a)):
-        if a[i] != b[i]:
-            return False
-    return True
+    """ Compare two GeoJSON Positions for equality. """
+    return (
+        isPosition(a) and gjtk.isPosition(b) and
+        len(a) == len(b) and
+        all(a[i] == b[i] for i in range(len(a)))
+    )
 
-
-################################################################################
-
-
-def load_geojson_file(*args):
-    """Load and validate GeoJSON files."""
-    for arg in args:
-        with open(arg) as data:
-            verify_geojson_file(data)
-
-
-def print_geojson(geojson, indent=4, separators=(",", ": ")):
-    """Print a GeoJSON object."""
-    print json.dumps(geojson, indent=indent, separators=separators)
-
-
-def verify_geojson_file(*args):
-    """Parse and validate opened GeoJSON files."""
-    for arg in args:
-        try:
-            loaded = json.load(arg)
-        except ValueError as error:
-            print error
-            return False
-        if isGeoJSON(loaded):
-            return loaded
-        else:
-            return False
