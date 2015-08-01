@@ -1,21 +1,39 @@
-"""GeoJSON Validator"""
 
-# TODO Validate CRS objects.
-# TODO Validate bbox members.
 
+import json
 import numbers
 
 
-def equal_positions(a, b):
-    """Check 2 GeoJSON Positions for equality."""
-    if not is_position(a) or not is_position(b):
+##################################################################### VALIDATION
+
+
+def is_geojson(x):
+    """Verify a dictionary is a valid GeoJSON object."""
+    if not isinstance(x, dict):
         return False
-    if len(a) != len(b):
+    return is_geometry(x) or is_feature(x) or is_feature_collection(x)
+
+
+def is_geometry(x):
+    """Verify a dictionary is a valid GeoJSON Geometry object."""
+    if not isinstance(x, dict):
         return False
-    for i in range(len(a)):
-        if a[i] != b[i]:
-            return False
-    return True
+    if 'type' in x.keys():
+        if x['type'] == 'GeometryCollection':
+            return is_geometry_collection(x)
+        if x['type'] == 'Point':
+            return is_position(x['coordinates'])
+        if x['type'] == 'MultiPoint':
+            return is_multi_point(x['coordinates'])
+        if x['type'] == 'LineString':
+            return is_line_string(x['coordinates'])
+        if x['type'] == 'MultiLineString':
+            return is_multi_line_string(x['coordinates'])
+        if x['type'] == 'Polygon':
+            return is_polygon(x['coordinates'])
+        if x['type'] == 'MultiPolygon':
+            return is_multi_polygon(x['coordinates'])
+    return False
 
 
 def is_position(x):
@@ -26,6 +44,38 @@ def is_position(x):
         if not isinstance(n, numbers.Number):
             return False
     return True
+
+
+def isPointCoordinates(x):
+    raise NotImplementedError()
+
+
+def isMultiPointCoordinates(x):
+    raise NotImplementedError()
+
+
+def isLineStringCoordinates(x):
+    raise NotImplementedError()
+
+
+def isLinearRingCoordinates(x):
+    raise NotImplementedError()
+
+
+def isMultiLineStringCoordinates(x):
+    raise NotImplementedError()
+
+
+def isPolygonCoordinates(x):
+    raise NotImplementedError()
+
+
+def isMultiPolygonCoordinates(x):
+    raise NotImplementedError()
+
+
+def isPoint(x):
+    raise NotImplementedError()
 
 
 def is_multi_point(x):
@@ -89,28 +139,6 @@ def is_multi_polygon(x):
     return True
 
 
-def is_geometry(x):
-    """Verify a dictionary is a valid GeoJSON Geometry object."""
-    if not isinstance(x, dict):
-        return False
-    if 'type' in x.keys():
-        if x['type'] == 'GeometryCollection':
-            return is_geometry_collection(x)
-        if x['type'] == 'Point':
-            return is_position(x['coordinates'])
-        if x['type'] == 'MultiPoint':
-            return is_multi_point(x['coordinates'])
-        if x['type'] == 'LineString':
-            return is_line_string(x['coordinates'])
-        if x['type'] == 'MultiLineString':
-            return is_multi_line_string(x['coordinates'])
-        if x['type'] == 'Polygon':
-            return is_polygon(x['coordinates'])
-        if x['type'] == 'MultiPolygon':
-            return is_multi_polygon(x['coordinates'])
-    return False
-
-
 def is_geometry_collection(x):
     """Verify a dictionary is a valid GeoJSON GeometryCollection object."""
     if not isinstance(x, dict):
@@ -148,8 +176,42 @@ def is_feature_collection(x):
     return False
 
 
-def is_geojson(x):
-    """Verify a dictionary is a valid GeoJSON object."""
-    if not isinstance(x, dict):
+################################################################################
+
+
+def load_geojson_file(*args):
+    """Load and validate GeoJSON files."""
+    for arg in args:
+        with open(arg) as data:
+            verify_geojson_file(data)
+
+
+def print_geojson(geojson, indent=4, separators=(",", ": ")):
+    """Print a GeoJSON object."""
+    print json.dumps(geojson, indent=indent, separators=separators)
+
+
+def verify_geojson_file(*args):
+    """Parse and validate opened GeoJSON files."""
+    for arg in args:
+        try:
+            loaded = json.load(arg)
+        except ValueError as error:
+            print error
+            return False
+        if is_geojson(loaded):
+            return loaded
+        else:
+            return False
+
+
+def equal_positions(a, b):
+    """Check 2 GeoJSON Positions for equality."""
+    if not is_position(a) or not is_position(b):
         return False
-    return is_geometry(x) or is_feature(x) or is_feature_collection(x)
+    if len(a) != len(b):
+        return False
+    for i in range(len(a)):
+        if a[i] != b[i]:
+            return False
+    return True
