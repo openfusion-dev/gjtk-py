@@ -10,118 +10,232 @@ class TemplateTest (unittest.TestCase):
 
     def test_Point(self):
         """ should return a valid Point object when provided a valid Position """
-        self.assertTrue(gjtk.validate.isPoint(gjtk.generate.Point(gjtk.generate.randomPosition())))
+        test_data = gjtk.generate.randomPosition()
+        test_result = gjtk.generate.Point(test_data)
+        self.assertTrue(
+            gjtk.validate.isPoint(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
     def test_Feature(self):
         """ should return a valid Feature object when provided a valid Geometry """
-        self.assertTrue(gjtk.validate.isFeature(gjtk.generate.Feature(gjtk.generate.randomGeometry())))
+        test_data = gjtk.generate.randomGeometry()
+        test_result = gjtk.generate.Feature(test_data)
+        self.assertTrue(
+            gjtk.validate.isFeature(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
     def test_FeatureCollection(self):
         """ should return a valid FeatureCollection object when provided valid Features """
         length = round(random.random()*100)%3
-        self.assertTrue(gjtk.validate.isFeatureCollection(gjtk.generate.FeatureCollection([gjtk.generate.randomFeature() for i in range(int(length))])))
+        test_data = [gjtk.generate.randomFeature() for i in range(int(length))]
+        test_result = gjtk.generate.FeatureCollection(test_data)
+        self.assertTrue(
+            gjtk.validate.isFeatureCollection(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
     def test_FeatureCollection_empty(self):
         """ should return a valid FeatureCollection object when provided nothing """
         length = round(random.random()*100)%3
-        self.assertTrue(gjtk.validate.isFeatureCollection(gjtk.generate.FeatureCollection()))
+        test_data = None
+        test_result = gjtk.generate.FeatureCollection(test_data)
+        self.assertTrue(
+            gjtk.validate.isFeatureCollection(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
     def test_GeometryCollection(self):
         """ should return a valid GeometryCollection object when provided valid Geometries """
         length = round(random.random()*100)%3
-        self.assertTrue(gjtk.validate.isGeometryCollection(gjtk.generate.GeometryCollection([gjtk.generate.randomGeometry() for i in range(int(length))])))
+        test_data = [gjtk.generate.randomGeometry() for i in range(int(length))]
+        test_result = gjtk.generate.GeometryCollection(test_data)
+        self.assertTrue(
+            gjtk.validate.isGeometryCollection(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
     def test_GeometryCollection_empty(self):
         """ should return a valid GeometryCollection object when provided nothing """
         length = round(random.random()*100)%3
-        self.assertTrue(gjtk.validate.isGeometryCollection(gjtk.generate.GeometryCollection()))
+        test_data = None
+        test_result = gjtk.generate.GeometryCollection(test_data)
+        self.assertTrue(
+            gjtk.validate.isGeometryCollection(test_result),
+            gjtk.test.error_message(test_data, test_result)
+        )
 
 
 class RandomTest (unittest.TestCase):
 
     def test_randomPosition(self):
         """ should return a valid Position """
-        self.assertTrue(gjtk.validate.isPosition(gjtk.generate.randomPosition()))
+        test_data = gjtk.generate.randomPosition()
+        self.assertTrue(
+            gjtk.validate.isPosition(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomPointCoordinates(self):
         """ should return a valid Point coordinates """
-        self.assertTrue(gjtk.validate.isPointCoordinates(gjtk.generate.randomPointCoordinates()))
+        test_data = gjtk.generate.randomPointCoordinates()
+        self.assertTrue(
+            gjtk.validate.isPointCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiPointCoordinates(self):
         """ should return a valid MultiPoint coordinates """
-        self.assertTrue(gjtk.validate.isMultiPointCoordinates(gjtk.generate.randomMultiPointCoordinates()))
+        test_data = gjtk.generate.randomMultiPointCoordinates()
+        self.assertTrue(
+            gjtk.validate.isMultiPointCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomLineStringCoordinates(self):
         """ should return a valid LineString coordinates """
-        self.assertTrue(gjtk.validate.isLineStringCoordinates(gjtk.generate.randomLineStringCoordinates()))
+        test_data = gjtk.generate.randomLineStringCoordinates()
+        self.assertTrue(
+            gjtk.validate.isLineStringCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomLinearRingCoordinates(self):
         """ should return a valid LinearRing coordinates """
-        self.assertTrue(gjtk.validate.isLinearRingCoordinates(gjtk.generate.randomLinearRingCoordinates()))
+        test_data = gjtk.generate.randomLinearRingCoordinates()
+        self.assertTrue(
+            gjtk.validate.isLinearRingCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiLineStringCoordinates(self):
         """ should return a valid MultiLineString coordinates """
-        self.assertTrue(gjtk.validate.isMultiLineStringCoordinates(gjtk.generate.randomMultiLineStringCoordinates()))
+        test_data = gjtk.generate.randomMultiLineStringCoordinates()
+        self.assertTrue(
+            gjtk.validate.isMultiLineStringCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomPolygonCoordinates(self):
         """ should return a valid Polygon coordinates """
-        self.assertTrue(gjtk.validate.isPolygonCoordinates(gjtk.generate.randomPolygonCoordinates()))
+        test_data = gjtk.generate.randomPolygonCoordinates()
+        self.assertTrue(
+            gjtk.validate.isPolygonCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiPolygonCoordinates(self):
         """ should return a valid MultiPolygon coordinates """
-        self.assertTrue(gjtk.validate.isMultiPolygonCoordinates(gjtk.generate.randomMultiPolygonCoordinates()))
+        test_data = gjtk.generate.randomMultiPolygonCoordinates()
+        self.assertTrue(
+            gjtk.validate.isMultiPolygonCoordinates(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomGeometry(self):
         """ should return a valid Geometry """
-        self.assertTrue(gjtk.validate.isGeometry(gjtk.generate.randomGeometry()))
+        test_data = gjtk.generate.randomGeometry()
+        self.assertTrue(
+            gjtk.validate.isGeometry(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiPoint(self):
         """ should return a valid MultiPoint """
-        self.assertTrue(gjtk.validate.isMultiPoint(gjtk.generate.randomMultiPoint()))
+        test_data = gjtk.generate.randomMultiPoint()
+        self.assertTrue(
+            gjtk.validate.isMultiPoint(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomLineString(self):
         """ should return a valid LineString """
-        self.assertTrue(gjtk.validate.isLineString(gjtk.generate.randomLineString()))
+        test_data = gjtk.generate.randomLineString()
+        self.assertTrue(
+            gjtk.validate.isLineString(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiLineString(self):
         """ should return a valid MultiLineString """
-        self.assertTrue(gjtk.validate.isMultiLineString(gjtk.generate.randomMultiLineString()))
+        test_data = gjtk.generate.randomMultiLineString()
+        self.assertTrue(
+            gjtk.validate.isMultiLineString(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomPolygon(self):
         """ should return a valid Polygon """
-        self.assertTrue(gjtk.validate.isPolygon(gjtk.generate.randomPolygon()))
+        test_data = gjtk.generate.randomPolygon()
+        self.assertTrue(
+            gjtk.validate.isPolygon(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomMultiPolygon(self):
         """ should return a valid MultiPolygon """
-        self.assertTrue(gjtk.validate.isMultiPolygon(gjtk.generate.randomMultiPolygon()))
+        test_data = gjtk.generate.randomMultiPolygon()
+        self.assertTrue(
+            gjtk.validate.isMultiPolygon(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomGeometryCollection(self):
         """ should return a valid GeometryCollection """
-        self.assertTrue(gjtk.validate.isGeometryCollection(gjtk.generate.randomGeometryCollection()))
+        test_data = gjtk.generate.randomGeometryCollection()
+        self.assertTrue(
+            gjtk.validate.isGeometryCollection(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomGeometryCollection(self):
         """ should return a valid GeometryCollection """
-        self.assertTrue(gjtk.validate.isGeometryCollection(gjtk.generate.randomGeometryCollection()))
+        test_data = gjtk.generate.randomGeometryCollection()
+        self.assertTrue(
+            gjtk.validate.isGeometryCollection(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomFeature(self):
         """ should return a valid Feature """
-        self.assertTrue(gjtk.validate.isFeature(gjtk.generate.randomFeature()))
+        test_data = gjtk.generate.randomFeature()
+        self.assertTrue(
+            gjtk.validate.isFeature(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomFeatureCollection(self):
         """ should return a valid FeatureCollection """
-        self.assertTrue(gjtk.validate.isFeatureCollection(gjtk.generate.randomFeatureCollection()))
+        test_data = gjtk.generate.randomFeatureCollection()
+        self.assertTrue(
+            gjtk.validate.isFeatureCollection(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomCRS(self):
         """ should return a valid CRS """
-        self.assertTrue(gjtk.validate.isCRS(gjtk.generate.randomCRS()))
+        test_data = gjtk.generate.randomCRS()
+        self.assertTrue(
+            gjtk.validate.isCRS(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomLink(self):
         """ should return a valid Link """
-        self.assertTrue(gjtk.validate.isLink(gjtk.generate.randomLink()))
+        test_data = gjtk.generate.randomLink()
+        self.assertTrue(
+            gjtk.validate.isLink(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
     def test_randomBbox(self):
         """ should return a valid Bbox """
-        self.assertTrue(gjtk.validate.isBbox(gjtk.generate.randomBbox()))
+        test_data = gjtk.generate.randomBbox()
+        self.assertTrue(
+            gjtk.validate.isBbox(test_data),
+            gjtk.test.error_message(test_data)
+        )
 
 
 if __name__ == "__main__":
