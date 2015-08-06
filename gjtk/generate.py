@@ -143,7 +143,7 @@ def randomFeature():
     return {
       "type": "Feature",
       "geometry": randomGeometry(),
-      "properties": None  # TODO
+      "properties": random.choice([None, {}, {'foo': 'bar'}])
     }
 
 
