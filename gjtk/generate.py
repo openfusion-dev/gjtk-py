@@ -167,11 +167,11 @@ def randomCRS():  # TODO
     }
 
 
-def randomLink():  # TODO
-    return {
-      "href": "data.crs",
-      "type": "ogcwkt"
-    }
+def randomLink():
+    link = { "href": "data.crs" if random.random() < 0.5 else "http://example.com/crs/42" }
+    if random.random() < 0.5:
+        link["type"] = random.choice(["proj4", "ogcwkt", "esriwkt"])
+    return link
 
 
 def randomBbox():  # TODO

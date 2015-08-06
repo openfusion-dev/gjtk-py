@@ -625,7 +625,8 @@ class isLinkTest (unittest.TestCase):
     def test_no_type(self):
         """ should return true when provided a Link object without a type """
         test_data = gjtk.generate.randomLink()
-        del test_data['type']
+        if test_data.has_key('type'):
+            del test_data['type']
         self.assertTrue(
             gjtk.validate.isLink(test_data),
             gjtk.test.error_message(test_data)
