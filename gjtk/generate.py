@@ -150,12 +150,9 @@ def randomMultiPolygon():
     }
 
 
-def randomGeometryCollection():
-    length = round(random.random()*100)%3
-    return {
-      "type": "GeometryCollection",
-      "geometries": [randomGeometry() for i in range(int(length))]
-    }
+def randomGeometryCollection(max_geometries=3):
+    length = round(random.random()*100)%max_geometries
+    return GeometryCollection(geometries=[randomGeometry() for i in range(int(length))])
 
 
 def randomFeature():
