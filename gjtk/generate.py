@@ -162,7 +162,7 @@ def randomCRS():  # TODO
     } if random.random() < 0.5 else {
         "type": "name",
         "properties": {
-            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84" if random.random() < 0.5 else "EPSG:4326"
         }
     }
 
