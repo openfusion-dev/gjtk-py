@@ -11,6 +11,14 @@ def Point(position):
     }
 
 
+def GeometryCollection(geometries=None):
+    """ Create a valid GeoJSON GeometryCollection. """
+    return {
+        "type": "GeometryCollection",
+        "geometries": [] if geometries is None else geometries
+    }
+
+
 def Feature(geometry, properties=None):
     """ Create a valid GeoJSON Feature. """
     return {
@@ -25,14 +33,6 @@ def FeatureCollection(features=None):
     return {
         "type": "FeatureCollection",
         "features": [] if features is None else features
-    }
-
-
-def GeometryCollection(geometries=None):
-    """ Create a valid GeoJSON GeometryCollection. """
-    return {
-        "type": "GeometryCollection",
-        "geometries": [] if geometries is None else geometries
     }
 
 
@@ -112,10 +112,7 @@ def randomGeometry():
 
 
 def randomPoint():
-    return {
-        "type": "Point",
-        "coordinates": randomPointCoordinates()
-    }
+    return Point(position=randomPosition())
 
 
 def randomMultiPoint():
