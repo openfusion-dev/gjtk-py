@@ -11,6 +11,46 @@ def Point(position):
     }
 
 
+def MultiPoint(coordinates=None):
+    """ Create a valid GeoJSON MultiPoint geometry. """
+    return {
+       "type": "MultiPoint",
+       "coordinates": [] if coordinates is None else coordinates
+    }
+
+
+def LineString(coordinates):
+    """ Create a valid GeoJSON LineString geometry. """
+    return {
+       "type": "LineString",
+       "coordinates": coordinates
+    }
+
+
+def MultiLineString(coordinates=None):
+    """ Create a valid GeoJSON MultiLineString geometry. """
+    return {
+       "type": "MultiLineString",
+       "coordinates": [] if coordinates is None else coordinates
+    }
+
+
+def Polygon(coordinates):
+    """ Create a valid GeoJSON Polygon geometry. """
+    return {
+       "type": "Polygon",
+       "coordinates": coordinates
+    }
+
+
+def MultiPolygon(coordinates=None):
+    """ Create a valid GeoJSON MultiPolygon geometry. """
+    return {
+       "type": "MultiPolygon",
+       "coordinates": [] if coordinates is None else coordinates
+    }
+
+
 def GeometryCollection(geometries=None):
     """ Create a valid GeoJSON GeometryCollection. """
     return {
@@ -19,7 +59,7 @@ def GeometryCollection(geometries=None):
     }
 
 
-def Feature(geometry, properties=None):
+def Feature(geometry=None, properties=None):
     """ Create a valid GeoJSON Feature. """
     return {
         "type": "Feature",
@@ -36,23 +76,25 @@ def FeatureCollection(features=None):
     }
 
 
-def randomPosition():
-    length = (round(random.random()*100)%6)+2
-    return [(random.random()-0.5)*100 for i in range(int(length))]
+def randomPosition(max_numbers=3, min_numbers=2):
+    assert min_numbers > 1, "There must be at least two elements, and may be more."
+    n = int((round(random.random()*100)%max_numbers)+min_numbers)
+    return [(random.random()-0.5)*100 for i in range(n)]
 
 
 def randomPointCoordinates():
     return randomPosition()
 
 
-def randomMultiPointCoordinates():
-    length = (round(random.random()*100)%6)+1
-    return [randomPosition() for i in range(int(length))]
+def randomMultiPointCoordinates(max_positions=6, min_positions=0):
+    n = int((round(random.random()*100)%max_positions)+min_positions)
+    return [randomPosition() for i in range(n)]
 
 
-def randomLineStringCoordinates():
-    length = (round(random.random()*100)%6)+2
-    return [randomPosition() for i in range(int(length))]
+def randomLineStringCoordinates(max_positions=6, min_positions=2):
+    assert min_positions > 1, 'For type "LineString", the "coordinates" member must be an array of two or more positions.'
+    n = int((round(random.random()*100)%max_positions)+min_positions)
+    return [randomPosition() for i in range(n)]
 
 
 def randomLinearRingCoordinates():
@@ -60,9 +102,9 @@ def randomLinearRingCoordinates():
     return [origin]+randomLineStringCoordinates()+[origin]
 
 
-def randomMultiLineStringCoordinates():
-    length = (round(random.random()*100)%6)+1
-    return [randomLineStringCoordinates() for i in range(int(length))]
+def randomMultiLineStringCoordinates(max_line_strings=6, min_line_strings=1):
+    n = int((round(random.random()*100)%max_line_strings)+min_line_strings)
+    return [randomLineStringCoordinates() for i in range(n)]
 
 
 def randomPolygonCoordinates():
@@ -94,9 +136,9 @@ def randomPolygonCoordinates():
     ]
 
 
-def randomMultiPolygonCoordinates():
-    length = (round(random.random()*100)%6)+1
-    return [randomPolygonCoordinates() for i in range(int(length))]
+def randomMultiPolygonCoordinates(max_polygons=6, min_polygons=1):
+    n = int((round(random.random()*100)%max_polygons)+min_polygons)
+    return [randomPolygonCoordinates() for i in range(n)]
 
 
 def randomGeometry():
@@ -150,21 +192,25 @@ def randomMultiPolygon():
     }
 
 
-def randomGeometryCollection(max_geometries=3):
-    length = round(random.random()*100)%max_geometries
-    return GeometryCollection(geometries=[randomGeometry() for i in range(int(length))])
+def randomGeometryCollection(max_geometries=3, min_geometries=0):
+    n = int((round(random.random()*100)%max_geometries)+min_geometries)
+    return GeometryCollection(geometries=[randomGeometry() for i in range(n)])
 
 
 def randomFeature():
-    return Feature(geometry=randomGeometry(), properties=random.choice([None, {}, {'foo': 'bar'}]))
+    return Feature(
+        geometry=randomGeometry(),
+        properties=random.choice([
+            None,
+            {},
+            {None: False}
+        ])
+    )
 
 
-def randomFeatureCollection():
-    length = round(random.random()*100)%3
-    return {
-      "type": "FeatureCollection",
-      "features": [randomFeature() for i in range(int(length))]
-    }
+def randomFeatureCollection(max_features=3, min_features=0):
+    n = int((round(random.random()*100)%max_features)+min_features)
+    return FeatureCollection(features=[randomFeature() for i in range(n)])
 
 
 def randomCRS():

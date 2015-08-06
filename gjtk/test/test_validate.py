@@ -95,7 +95,7 @@ class isPositionTest (unittest.TestCase):
 
     def test_valid_Position(self):
         """ should return true when provided an array of at least 2 numbers """
-        test_data = gjtk.generate.randomPosition()
+        test_data = gjtk.generate.randomPosition(max_numbers=6)
         self.assertTrue(
             gjtk.validate.isPosition(test_data),
             gjtk.test.error_message(test_data)
@@ -698,7 +698,7 @@ class equalPositions (unittest.TestCase):
 
     def test_same(self):
         """ should return true when provided identical Positions """
-        test_data = gjtk.generate.randomPosition()
+        test_data = gjtk.generate.randomPosition(max_numbers=6)
         self.assertTrue(
             gjtk.validate.equalPositions(test_data, test_data),
             gjtk.test.error_message(test_data)
@@ -706,10 +706,10 @@ class equalPositions (unittest.TestCase):
 
     def test_diff(self):
         """ should return false when provided different Positions """
-        test_data1 = gjtk.generate.randomPosition()
-        test_data2 = gjtk.generate.randomPosition()
+        test_data1 = gjtk.generate.randomPosition(max_numbers=6)
+        test_data2 = gjtk.generate.randomPosition(max_numbers=6)
         while test_data1[0] == test_data2[0]:
-            gjtk.generate.randomPosition()
+            gjtk.generate.randomPosition(max_numbers=6)
         self.assertFalse(
             gjtk.validate.equalPositions(test_data1, test_data2),
             gjtk.test.error_message([test_data1, test_data2])
