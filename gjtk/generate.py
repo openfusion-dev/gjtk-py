@@ -6,8 +6,8 @@ import random
 def Point(position):
     """ Create a valid GeoJSON Point geometry. """
     return {
-      "type": "Point",
-      "coordinates": position
+       "type": "Point",
+       "coordinates": position
     }
 
 
@@ -16,7 +16,7 @@ def Feature(geometry, properties=None):
     return {
         "type": "Feature",
         "geometry": geometry,
-        properties: properties
+        "properties": properties
     }
 
 
