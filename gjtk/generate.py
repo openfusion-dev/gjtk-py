@@ -65,10 +65,32 @@ def randomMultiLineStringCoordinates():
     return [randomLineStringCoordinates() for i in range(int(length))]
 
 
-def randomPolygonCoordinates():  # TODO
+def randomPolygonCoordinates():
+    quadrant = [
+        1 if random.random() < 0.5 else -1,
+        1 if random.random() < 0.5 else -1
+    ]
+    center = [
+        quadrant[0]*random.random()*1000,
+        quadrant[1]*random.random()*1000
+    ]
+    apothem = (random.random()*100)+100
+    delta = (random.random()*10)+10
     return [randomLinearRingCoordinates()] if random.random() < 0.5 else [
-      [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ],
-      [ [100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2] ]
+        [
+            [center[0]-apothem, center[1]-apothem],  #  left-bottom
+            [center[0]-apothem, center[1]+apothem],  #  left-top
+            [center[0]+apothem, center[1]+apothem],  # right-top
+            [center[0]+apothem, center[1]-apothem],  # right-bottom
+            [center[0]-apothem, center[1]-apothem]   #  left-bottom
+        ],
+        [
+            [center[0]-apothem+delta, center[1]-apothem+delta],  #  left-bottom
+            [center[0]-apothem+delta, center[1]+apothem-delta],  #  left-top
+            [center[0]+apothem-delta, center[1]+apothem-delta],  # right-top
+            [center[0]+apothem-delta, center[1]-apothem+delta],  # right-bottom
+            [center[0]-apothem+delta, center[1]-apothem+delta]   #  left-bottom
+        ]
     ]
 
 
@@ -155,7 +177,7 @@ def randomFeatureCollection():
     }
 
 
-def randomCRS():  # TODO
+def randomCRS():
     return {
         "type": "link",
         "properties": randomLink()
