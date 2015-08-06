@@ -75,7 +75,7 @@ def randomPolygonCoordinates():
         quadrant[1]*random.random()*1000
     ]
     apothem = (random.random()*100)+100
-    delta = (random.random()*10)+10
+    delta = (random.random()*10)+1
     return [randomLinearRingCoordinates()] if random.random() < 0.5 else [
         [
             [center[0]-apothem, center[1]-apothem],  #  left-bottom
