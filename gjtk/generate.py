@@ -156,6 +156,7 @@ def randomGeometryCollection(max_geometries=3):
 
 
 def randomFeature():
+    return Feature(geometry=randomGeometry(), properties=random.choice([None, {}, {'foo': 'bar'}]))
     return {
       "type": "Feature",
       "geometry": randomGeometry(),
