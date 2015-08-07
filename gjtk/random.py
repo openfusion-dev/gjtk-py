@@ -8,8 +8,7 @@ import gjtk
 
 def Position(max_numbers=3, min_numbers=2):
     assert min_numbers > 1, "There must be at least two elements, and may be more."
-    n = int((round(random.random()*100)%max_numbers)+min_numbers)
-    return [(random.random()-0.5)*100 for i in range(n)]
+    return [(random.random()-0.5)*100 for i in range(random.randint(min_numbers, max_numbers))]
 
 
 def PointCoordinates():
@@ -17,14 +16,12 @@ def PointCoordinates():
 
 
 def MultiPointCoordinates(max_positions=6, min_positions=0):
-    n = int((round(random.random()*100)%max_positions)+min_positions)
-    return [Position() for i in range(n)]
+    return [Position() for i in range(random.randint(min_positions, max_positions))]
 
 
 def LineStringCoordinates(max_positions=6, min_positions=2):
     assert min_positions > 1, 'For type "LineString", the "coordinates" member must be an array of two or more positions.'
-    n = int((round(random.random()*100)%max_positions)+min_positions)
-    return [Position() for i in range(n)]
+    return [Position() for i in range(random.randint(min_positions, max_positions))]
 
 
 def LinearRingCoordinates():
@@ -33,8 +30,7 @@ def LinearRingCoordinates():
 
 
 def MultiLineStringCoordinates(max_line_strings=6, min_line_strings=1):
-    n = int((round(random.random()*100)%max_line_strings)+min_line_strings)
-    return [LineStringCoordinates() for i in range(n)]
+    return [LineStringCoordinates() for i in range(random.randint(min_line_strings, max_line_strings))]
 
 
 def PolygonCoordinates():
@@ -67,8 +63,7 @@ def PolygonCoordinates():
 
 
 def MultiPolygonCoordinates(max_polygons=6, min_polygons=1):
-    n = int((round(random.random()*100)%max_polygons)+min_polygons)
-    return [PolygonCoordinates() for i in range(n)]
+    return [PolygonCoordinates() for i in range(random.randint(min_polygons, max_polygons))]
 
 
 def Geometry():
@@ -108,8 +103,9 @@ def MultiPolygon():
 
 
 def GeometryCollection(max_geometries=3, min_geometries=0):
-    n = int((round(random.random()*100)%max_geometries)+min_geometries)
-    return gjtk.generate.GeometryCollection(geometries=[Geometry() for i in range(n)])
+    return gjtk.generate.GeometryCollection(
+        geometries=[Geometry() for i in range(random.randint(min_geometries, max_geometries))]
+    )
 
 
 def Feature():
@@ -124,8 +120,9 @@ def Feature():
 
 
 def FeatureCollection(max_features=3, min_features=0):
-    n = int((round(random.random()*100)%max_features)+min_features)
-    return gjtk.generate.FeatureCollection(features=[Feature() for i in range(n)])
+    return gjtk.generate.FeatureCollection(
+        features=[Feature() for i in range(random.randint(min_features, max_features))]
+    )
 
 
 def CRS():
