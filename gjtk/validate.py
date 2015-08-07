@@ -55,7 +55,7 @@ def isLineStringCoordinates(x):
 
 
 def isLinearRingCoordinates(x):
-    """ Validate the coordinates of a GeoJSON LinearRing. """
+    """ Validate a GeoJSON LinearRing. """
     return (
         x is not None and
         len(x) > 3 and
@@ -212,7 +212,7 @@ def isCRS(x):
 
 
 def hasCRS(x):
-    """ Validate the CRS property of a GeoJSON object. """
+    """ Validate the crs property of a GeoJSON object. """
     return (
         x is not None and
         (
