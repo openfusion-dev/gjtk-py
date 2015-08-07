@@ -144,6 +144,11 @@ def Link():
     return link
 
 
-def Bbox():  # TODO
-    return [-180.0, -90.0, 180.0, 90.0]
+def Bbox(max_dimensions=4, min_dimensions=2):
+    lower_bounds = []
+    upper_bounds = []
+    for i in range(random.randint(min_dimensions, max_dimensions)):
+        lower_bounds.append(random.random()*-100)
+        upper_bounds.append(random.random()* 100)
+    return lower_bounds+upper_bounds
 
