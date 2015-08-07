@@ -1,7 +1,7 @@
 
 
 def Point(position):
-    """ Create a valid GeoJSON Point geometry. """
+    """ Create a valid GeoJSON Point. """
     return {
        "type": "Point",
        "coordinates": position
@@ -9,7 +9,7 @@ def Point(position):
 
 
 def MultiPoint(coordinates=None):
-    """ Create a valid GeoJSON MultiPoint geometry. """
+    """ Create a valid GeoJSON MultiPoint. """
     return {
        "type": "MultiPoint",
        "coordinates": [] if coordinates is None else coordinates
@@ -17,7 +17,7 @@ def MultiPoint(coordinates=None):
 
 
 def LineString(coordinates):
-    """ Create a valid GeoJSON LineString geometry. """
+    """ Create a valid GeoJSON LineString. """
     return {
        "type": "LineString",
        "coordinates": coordinates
@@ -25,7 +25,7 @@ def LineString(coordinates):
 
 
 def MultiLineString(coordinates=None):
-    """ Create a valid GeoJSON MultiLineString geometry. """
+    """ Create a valid GeoJSON MultiLineString. """
     return {
        "type": "MultiLineString",
        "coordinates": [] if coordinates is None else coordinates
@@ -33,7 +33,7 @@ def MultiLineString(coordinates=None):
 
 
 def Polygon(coordinates):
-    """ Create a valid GeoJSON Polygon geometry. """
+    """ Create a valid GeoJSON Polygon. """
     return {
        "type": "Polygon",
        "coordinates": coordinates
@@ -41,7 +41,7 @@ def Polygon(coordinates):
 
 
 def MultiPolygon(coordinates=None):
-    """ Create a valid GeoJSON MultiPolygon geometry. """
+    """ Create a valid GeoJSON MultiPolygon. """
     return {
        "type": "MultiPolygon",
        "coordinates": [] if coordinates is None else coordinates
