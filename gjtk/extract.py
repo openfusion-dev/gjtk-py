@@ -1,7 +1,7 @@
 
 
 def positionsOf(geojson):
-    """ Find all the Positions in a valid GeoJSON object. """
+    """ Find all Positions in a valid GeoJSON object. """
     positions = []
     if geojson["type"] == "Point":
         positions.append(geojson["coordinates"])
