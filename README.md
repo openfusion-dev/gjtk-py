@@ -42,7 +42,7 @@ import gjtk
 
 ### `gjtk.random`
 
-* *`Position(max_numbers=3, min_numbers=2)`* returns a random [Position](http://geojson.org/geojson-spec.html#positions)
+* `Position(max_numbers=3, min_numbers=2)` returns a random [Position](http://geojson.org/geojson-spec.html#positions)
 * `PointCoordinates()` returns random [Point](http://geojson.org/geojson-spec.html#point) coordinates
 * `MultiPointCoordinates(max_positions=6, min_positions=0)` returns random [MultiPoint](http://geojson.org/geojson-spec.html#multipoint) coordinates
 * `LineStringCoordinates(max_positions=6, min_positions=2)` returns random [LineString](http://geojson.org/geojson-spec.html#linestring) coordinates
