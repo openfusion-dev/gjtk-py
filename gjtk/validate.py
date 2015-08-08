@@ -4,77 +4,77 @@ from matplotlib.path import Path
 from numbers import Number
 
 
-def isGeoJSON(x):
+def isGeoJSON(anything):
     """ Validate a GeoJSON object. """
     return (
-        isGeometry(x) or
-        isFeature(x) or
-        isFeatureCollection(x)
+        isGeometry(anything) or
+        isFeature(anything) or
+        isFeatureCollection(anything)
     )
 
 
-def isGeometry(x):
+def isGeometry(anything):
     """ Validate a GeoJSON Geometry. """
     return (
-        isPoint(x) or
-        isMultiPoint(x) or
-        isLineString(x) or
-        isMultiLineString(x) or
-        isPolygon(x) or
-        isMultiPolygon(x) or
-        isGeometryCollection(x)
+        isPoint(anything) or
+        isMultiPoint(anything) or
+        isLineString(anything) or
+        isMultiLineString(anything) or
+        isPolygon(anything) or
+        isMultiPolygon(anything) or
+        isGeometryCollection(anything)
     )
 
 
-def isPosition(x):
+def isPosition(anything):
     """ Validate a GeoJSON Position. """
     return (
-        x is not None and
-        len(x) > 1 and
-        all(isinstance(n, Number) for n in x)
+        anything is not None and
+        len(anything) > 1 and
+        all(isinstance(n, Number) for n in anything)
     )
 
 
-def isPointCoordinates(x):
+def isPointCoordinates(anything):
     """ Validate the coordinates of a GeoJSON Point. """
-    return isPosition(x)
+    return isPosition(anything)
 
 
-def isMultiPointCoordinates(x):
+def isMultiPointCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPoint. """
-    return x is not None and all(isPosition(position) for position in x)
+    return anything is not None and all(isPosition(position) for position in anything)
 
 
-def isLineStringCoordinates(x):
+def isLineStringCoordinates(anything):
     """ Validate the coordinates of a GeoJSON LineString. """
     return (
-        x is not None and
-        len(x) > 1 and
-        all(isPosition(position) for position in x)
+        anything is not None and
+        len(anything) > 1 and
+        all(isPosition(position) for position in anything)
     )
 
 
-def isLinearRingCoordinates(x):
+def isLinearRingCoordinates(anything):
     """ Validate a GeoJSON LinearRing. """
     return (
-        x is not None and
-        len(x) > 3 and
-        isLineStringCoordinates(x) and
-        equalPositions(x[0],x[len(x)-1])
+        anything is not None and
+        len(anything) > 3 and
+        isLineStringCoordinates(anything) and
+        equalPositions(anything[0],anything[len(anything)-1])
     )
 
 
-def isMultiLineStringCoordinates(x):
+def isMultiLineStringCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiLineString. """
-    return x is not None and all(isLineStringCoordinates(line_string_coords) for line_string_coords in x)
+    return anything is not None and all(isLineStringCoordinates(line_string_coords) for line_string_coords in anything)
 
 
-def isPolygonCoordinates(x):
+def isPolygonCoordinates(anything):
     """ Validate the coordinates of a GeoJSON Polygon. """
-    if x is None:
+    if anything is None:
         return False
     prev = None
-    for linear_ring in x:
+    for linear_ring in anything:
         if not isLinearRingCoordinates(linear_ring):
             return False
         if prev is not None and not containedPolygon(linear_ring, prev):
@@ -83,178 +83,178 @@ def isPolygonCoordinates(x):
     return True
 
 
-def isMultiPolygonCoordinates(x):
+def isMultiPolygonCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPolygon. """
-    return x is not None and all(isPolygonCoordinates(polygon_coords) for polygon_coords in x)
+    return anything is not None and all(isPolygonCoordinates(polygon_coords) for polygon_coords in anything)
 
 
-def isPoint(x):
+def isPoint(anything):
     """ Validate a GeoJSON Point. """
     return (
-        x is not None and
-        x.get("type") == "Point" and
-        isPointCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "Point" and
+        isPointCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isMultiPoint(x):
+def isMultiPoint(anything):
     """ Validate a GeoJSON MultiPoint. """
     return (
-        x is not None and
-        x.get("type") == "MultiPoint" and
-        isMultiPointCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "MultiPoint" and
+        isMultiPointCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isLineString(x):
+def isLineString(anything):
     """ Validate a GeoJSON LineString. """
     return (
-        x is not None and
-        x.get("type") == "LineString" and
-        isLineStringCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "LineString" and
+        isLineStringCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isMultiLineString(x):
+def isMultiLineString(anything):
     """ Validate a GeoJSON MultiLineString. """
     return (
-        x is not None and
-        x.get("type") == "MultiLineString" and
-        isMultiLineStringCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "MultiLineString" and
+        isMultiLineStringCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isPolygon(x):
+def isPolygon(anything):
     """ Validate a GeoJSON Polygon. """
     return (
-        x is not None and
-        x.get("type") == "Polygon" and
-        isPolygonCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "Polygon" and
+        isPolygonCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isMultiPolygon(x):
+def isMultiPolygon(anything):
     """ Validate a GeoJSON MultiPolygon. """
     return (
-        x is not None and
-        x.get("type") == "MultiPolygon" and
-        isMultiPolygonCoordinates(x.get("coordinates")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "MultiPolygon" and
+        isMultiPolygonCoordinates(anything.get("coordinates")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isGeometryCollection(x):
+def isGeometryCollection(anything):
     """ Validate a GeoJSON GeometryCollection. """
     return (
-        x is not None and
-        x.get("type") == "GeometryCollection" and
-        x.has_key("geometries") and
-        all(isGeometry(geometry) for geometry in x["geometries"]) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "GeometryCollection" and
+        anything.has_key("geometries") and
+        all(isGeometry(geometry) for geometry in anything["geometries"]) and
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isFeature(x):
+def isFeature(anything):
     """ Validate a GeoJSON Feature. """
     return (
-        x is not None and
-        x.get("type") == "Feature" and
-        x.has_key("geometry") and
+        anything is not None and
+        anything.get("type") == "Feature" and
+        anything.has_key("geometry") and
         (
-            x["geometry"] is None or
-            isGeometry(x["geometry"])
+            anything["geometry"] is None or
+            isGeometry(anything["geometry"])
         ) and
-        hasCRS(x) and
-        hasBbox(x)
+        hasCRS(anything) and
+        hasBbox(anything)
     )
 
 
-def isFeatureCollection(x):
+def isFeatureCollection(anything):
     """ Validate a GeoJSON FeatureCollection. """
     return (
-        x is not None and
-        x.get("type") == "FeatureCollection" and
-        x.has_key("features") and
-        all(isFeature(feature) for feature in x.get("features")) and
-        hasCRS(x) and
-        hasBbox(x)
+        anything is not None and
+        anything.get("type") == "FeatureCollection" and
+        anything.has_key("features") and
+        all(isFeature(feature) for feature in anything.get("features")) and
+        hasCRS(anything) and
+        hasBbox(anything)
     );
 
 
-def isCRS(x):
+def isCRS(anything):
     """ Validate a GeoJSON Coordinate Reference System. """
     return (
-        x is not None and
+        anything is not None and
         (
             (
-                x.get("type") == "name" and
-                x.get("properties") is not None and
-                len(str(x["properties"].get("name", ""))) > 0
+                anything.get("type") == "name" and
+                anything.get("properties") is not None and
+                len(str(anything["properties"].get("name", ""))) > 0
             ) or
             (
-                x.get("type") == "link" and
-                isLink(x.get("properties"))
+                anything.get("type") == "link" and
+                isLink(anything.get("properties"))
             )
         )
     )
 
 
-def hasCRS(x):
+def hasCRS(anything):
     """ Validate the crs property of a GeoJSON object. """
     return (
-        x is not None and
+        anything is not None and
         (
-            x.get("crs") is None or
-            isCRS(x["crs"])
+            anything.get("crs") is None or
+            isCRS(anything["crs"])
         )
     )
 
 
-def isLink(x):
+def isLink(anything):
     """ Validate a GeoJSON Link. """
     try:
         return (
-            x is not None and
+            anything is not None and
             (
-                x.get("type") is None or
-                len(str(x["type"])) > 0
+                anything.get("type") is None or
+                len(str(anything["type"])) > 0
             ) and
-            str(x["href"])
+            str(anything["href"])
         )
     except:
         return False
 
 
-def isBbox(x):
-    """ Validate a GeoJSON Bounding Box. """
-    if x is None or len(x)%2 != 0:
+def isBbox(anything):
+    """ Validate a GeoJSON Bounding Boanything. """
+    if anything is None or len(anything)%2 != 0:
         return False
-    pivot = len(x)/2
+    pivot = len(anything)/2
     for i in range(pivot):
-        if x[i] > x[i+pivot]:
+        if anything[i] > anything[i+pivot]:
             return False
     return True
 
 
-def hasBbox(x):
+def hasBbox(anything):
     """ Validate the bbox property of a GeoJSON object. """
     return (
-        x is not None and
+        anything is not None and
         (
-            x.get("bbox") is None or
-            isBbox(x["bbox"])
+            anything.get("bbox") is None or
+            isBbox(anything["bbox"])
         )
     )
 
@@ -280,12 +280,12 @@ def containedPolygon(inner, outer):
 ##################################################################### DEPRECATED
 
 
-def validCRS(x):
+def validCRS(anything):
     """ DEPRECATED: Use hasCRS instead. """
-    return hasCRS(x)
+    return hasCRS(anything)
 
 
-def validBbox(x):
+def validBbox(anything):
     """ DEPRECATED: Use hasBbox instead. """
-    return hasBbox(x)
+    return hasBbox(anything)
 
