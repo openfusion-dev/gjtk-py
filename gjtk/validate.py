@@ -4,6 +4,16 @@ from matplotlib.path import Path
 from numbers import Number
 
 
+def boolean_fail(f):
+    def wrapped_f(*args, **kwargs):
+        try:
+            return f(*args, **kwargs)
+        except:
+            return False
+    return wrapped_f
+
+
+@boolean_fail
 def isGeoJSON(anything):
     """ Validate a GeoJSON object. """
     return (
@@ -13,6 +23,7 @@ def isGeoJSON(anything):
     )
 
 
+@boolean_fail
 def isGeometry(anything):
     """ Validate a GeoJSON Geometry. """
     return (
@@ -26,6 +37,7 @@ def isGeometry(anything):
     )
 
 
+@boolean_fail
 def isPosition(anything):
     """ Validate a GeoJSON Position. """
     return (
@@ -35,16 +47,19 @@ def isPosition(anything):
     )
 
 
+@boolean_fail
 def isPointCoordinates(anything):
     """ Validate the coordinates of a GeoJSON Point. """
     return isPosition(anything)
 
 
+@boolean_fail
 def isMultiPointCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPoint. """
     return anything is not None and all(isPosition(position) for position in anything)
 
 
+@boolean_fail
 def isLineStringCoordinates(anything):
     """ Validate the coordinates of a GeoJSON LineString. """
     return (
@@ -54,6 +69,7 @@ def isLineStringCoordinates(anything):
     )
 
 
+@boolean_fail
 def isLinearRingCoordinates(anything):
     """ Validate a GeoJSON LinearRing. """
     return (
@@ -64,11 +80,13 @@ def isLinearRingCoordinates(anything):
     )
 
 
+@boolean_fail
 def isMultiLineStringCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiLineString. """
     return anything is not None and all(isLineStringCoordinates(line_string_coords) for line_string_coords in anything)
 
 
+@boolean_fail
 def isPolygonCoordinates(anything):
     """ Validate the coordinates of a GeoJSON Polygon. """
     if anything is None:
@@ -83,11 +101,13 @@ def isPolygonCoordinates(anything):
     return True
 
 
+@boolean_fail
 def isMultiPolygonCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPolygon. """
     return anything is not None and all(isPolygonCoordinates(polygon_coords) for polygon_coords in anything)
 
 
+@boolean_fail
 def isPoint(anything):
     """ Validate a GeoJSON Point. """
     return (
@@ -99,6 +119,7 @@ def isPoint(anything):
     )
 
 
+@boolean_fail
 def isMultiPoint(anything):
     """ Validate a GeoJSON MultiPoint. """
     return (
@@ -110,6 +131,7 @@ def isMultiPoint(anything):
     )
 
 
+@boolean_fail
 def isLineString(anything):
     """ Validate a GeoJSON LineString. """
     return (
@@ -121,6 +143,7 @@ def isLineString(anything):
     )
 
 
+@boolean_fail
 def isMultiLineString(anything):
     """ Validate a GeoJSON MultiLineString. """
     return (
@@ -132,6 +155,7 @@ def isMultiLineString(anything):
     )
 
 
+@boolean_fail
 def isPolygon(anything):
     """ Validate a GeoJSON Polygon. """
     return (
@@ -143,6 +167,7 @@ def isPolygon(anything):
     )
 
 
+@boolean_fail
 def isMultiPolygon(anything):
     """ Validate a GeoJSON MultiPolygon. """
     return (
@@ -154,6 +179,7 @@ def isMultiPolygon(anything):
     )
 
 
+@boolean_fail
 def isGeometryCollection(anything):
     """ Validate a GeoJSON GeometryCollection. """
     return (
@@ -166,6 +192,7 @@ def isGeometryCollection(anything):
     )
 
 
+@boolean_fail
 def isFeature(anything):
     """ Validate a GeoJSON Feature. """
     return (
@@ -181,6 +208,7 @@ def isFeature(anything):
     )
 
 
+@boolean_fail
 def isFeatureCollection(anything):
     """ Validate a GeoJSON FeatureCollection. """
     return (
@@ -193,6 +221,7 @@ def isFeatureCollection(anything):
     );
 
 
+@boolean_fail
 def isCRS(anything):
     """ Validate a GeoJSON Coordinate Reference System. """
     return (
@@ -211,6 +240,7 @@ def isCRS(anything):
     )
 
 
+@boolean_fail
 def hasCRS(anything):
     """ Validate the crs property of a GeoJSON object. """
     return (
@@ -222,6 +252,7 @@ def hasCRS(anything):
     )
 
 
+@boolean_fail
 def isLink(anything):
     """ Validate a GeoJSON Link. """
     try:
@@ -237,6 +268,7 @@ def isLink(anything):
         return False
 
 
+@boolean_fail
 def isBbox(anything):
     """ Validate a GeoJSON Bounding Boanything. """
     if anything is None or len(anything)%2 != 0:
@@ -248,6 +280,7 @@ def isBbox(anything):
     return True
 
 
+@boolean_fail
 def hasBbox(anything):
     """ Validate the bbox property of a GeoJSON object. """
     return (
@@ -262,6 +295,7 @@ def hasBbox(anything):
 ##################################################################### COMPARISON
 
 
+@boolean_fail
 def equalPositions(a, b):
     """ Compare two GeoJSON Positions for equality. """
     return (
@@ -271,6 +305,7 @@ def equalPositions(a, b):
     )
 
 
+@boolean_fail
 def containedPolygon(inner, outer):
     """ Determine whether one GeoJSON LinearRing contains another. """
     outer_path = Path(outer)
@@ -280,11 +315,13 @@ def containedPolygon(inner, outer):
 ##################################################################### DEPRECATED
 
 
+@boolean_fail
 def validCRS(anything):
     """ DEPRECATED: Use hasCRS instead. """
     return hasCRS(anything)
 
 
+@boolean_fail
 def validBbox(anything):
     """ DEPRECATED: Use hasBbox instead. """
     return hasBbox(anything)
