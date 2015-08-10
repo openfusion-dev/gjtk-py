@@ -241,9 +241,12 @@ def isCRS(anything):
 
 
 @boolean_fail
-def hasCRS(anything):
+def hasCRS(anything, required=False):
     """ Validate the crs property of a GeoJSON object. """
     return (
+        anything is not None and
+        isCRS(anything.get("crs"))
+    ) if required else (
         anything is not None and
         (
             anything.get("crs") is None or
@@ -255,22 +258,19 @@ def hasCRS(anything):
 @boolean_fail
 def isLink(anything):
     """ Validate a GeoJSON Link. """
-    try:
-        return (
-            anything is not None and
-            (
-                anything.get("type") is None or
-                len(str(anything["type"])) > 0
-            ) and
-            str(anything["href"])
-        )
-    except:
-        return False
+    return (
+        anything is not None and
+        (
+            anything.get("type") is None or
+            len(str(anything["type"])) > 0
+        ) and
+        str(anything["href"])
+    )
 
 
 @boolean_fail
 def isBbox(anything):
-    """ Validate a GeoJSON Bounding Boanything. """
+    """ Validate a GeoJSON Bounding Box. """
     if anything is None or len(anything)%2 != 0:
         return False
     pivot = len(anything)/2
@@ -281,9 +281,12 @@ def isBbox(anything):
 
 
 @boolean_fail
-def hasBbox(anything):
+def hasBbox(anything, required=False):
     """ Validate the bbox property of a GeoJSON object. """
     return (
+        anything is not None and
+        isBbox(anything.get("bbox"))
+    ) if required else (
         anything is not None and
         (
             anything.get("bbox") is None or
