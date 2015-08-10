@@ -271,7 +271,7 @@ def isLink(anything):
 @boolean_fail
 def isBbox(anything):
     """ Validate a GeoJSON Bounding Box. """
-    if anything is None or len(anything)%2 != 0:
+    if anything is None or len(anything) < 1 or len(anything)%2 != 0:
         return False
     pivot = len(anything)/2
     for i in range(pivot):
