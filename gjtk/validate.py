@@ -56,7 +56,10 @@ def isPointCoordinates(anything):
 @boolean_fail
 def isMultiPointCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPoint. """
-    return anything is not None and all(isPosition(position) for position in anything)
+    return (
+        anything is not None and
+        all(isPosition(position) for position in anything)
+    )
 
 
 @boolean_fail
@@ -83,7 +86,10 @@ def isLinearRingCoordinates(anything):
 @boolean_fail
 def isMultiLineStringCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiLineString. """
-    return anything is not None and all(isLineStringCoordinates(line_string_coords) for line_string_coords in anything)
+    return (
+        anything is not None and
+        all(isLineStringCoordinates(line_string_coords) for line_string_coords in anything)
+    )
 
 
 @boolean_fail
@@ -104,7 +110,10 @@ def isPolygonCoordinates(anything):
 @boolean_fail
 def isMultiPolygonCoordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPolygon. """
-    return anything is not None and all(isPolygonCoordinates(polygon_coords) for polygon_coords in anything)
+    return (
+        anything is not None and
+        all(isPolygonCoordinates(polygon_coords) for polygon_coords in anything)
+    )
 
 
 @boolean_fail
