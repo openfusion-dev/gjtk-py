@@ -220,7 +220,6 @@ class isMultiPointCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
@@ -247,7 +246,6 @@ class isLineStringCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
@@ -274,7 +272,6 @@ class isLinearRingCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
@@ -301,7 +298,6 @@ class isMultiLineStringCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
@@ -328,7 +324,6 @@ class isPolygonCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
@@ -355,7 +350,6 @@ class isMultiPolygonCoordinatesTest (unittest.TestCase):
             0,
             '',
             {},
-            [],
             random.choice,
             None
         ])
