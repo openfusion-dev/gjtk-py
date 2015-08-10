@@ -98,7 +98,7 @@ def isPolygonCoordinates(anything):
         if prev is not None and not containedPolygon(linear_ring, prev):
             return False
         prev = linear_ring
-    return True
+    return prev is not None
 
 
 @boolean_fail
