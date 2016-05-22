@@ -1,4 +1,4 @@
-
+"""Tests for GeoJSON ToolKit Validation Utilities"""
 
 import random
 import unittest
@@ -6,34 +6,36 @@ import unittest
 import gjtk
 
 
-class isGeoJSONTest (unittest.TestCase):
+class GeoJSONTest(unittest.TestCase):
 
-    def test_valid_Geometry(self):
-        """ should return true when provided a valid Geometry object """
-        test_data = gjtk.random.Geometry()
+    """Tests for GeoJSON Validation"""
+
+    def test_geometry(self):
+        """should return true when provided a valid Geometry object"""
+        test_data = gjtk.random.geometry()
         self.assertTrue(
-            gjtk.validate.isGeoJSON(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geojson(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_Feature(self):
-        """ should return true when provided a valid Feature object """
-        test_data = gjtk.random.Feature()
+    def test_feature(self):
+        """should return true when provided a valid Feature object"""
+        test_data = gjtk.random.feature()
         self.assertTrue(
-            gjtk.validate.isGeoJSON(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geojson(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_FeatureCollection(self):
-        """ should return true when provided a valid Feature object """
-        test_data = gjtk.random.FeatureCollection()
+    def test_feature_collection(self):
+        """should return true when provided a valid Feature object"""
+        test_data = gjtk.random.feature_collection()
         self.assertTrue(
-            gjtk.validate.isGeoJSON(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geojson(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -41,74 +43,76 @@ class isGeoJSONTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isGeoJSON(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geojson(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isGeometryTest (unittest.TestCase):
+class GeometryTest(unittest.TestCase):
 
-    def test_valid_Point(self):
-        """ should return true when provided a valid Point object """
-        test_data = gjtk.random.Point()
+    """Tests for Geometry Validation"""
+
+    def test_point(self):
+        """should return true when provided a valid Point object"""
+        test_data = gjtk.random.point()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_MultiPoint(self):
-        """ should return true when provided a valid MultiPoint object """
-        test_data = gjtk.random.MultiPoint()
+    def test_multi_point(self):
+        """should return true when provided a valid MultiPoint object"""
+        test_data = gjtk.random.multi_point()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_LineString(self):
-        """ should return true when provided a valid LineString object """
-        test_data = gjtk.random.LineString()
+    def test_line_string(self):
+        """should return true when provided a valid LineString object"""
+        test_data = gjtk.random.line_string()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_MultiLineString(self):
-        """ should return true when provided a valid MultiLineString object """
-        test_data = gjtk.random.MultiLineString()
+    def test_multi_line_string(self):
+        """should return true when provided a valid MultiLineString object"""
+        test_data = gjtk.random.multi_line_string()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_Polygon(self):
-        """ should return true when provided a valid Polygon object """
-        test_data = gjtk.random.Polygon()
+    def test_polygon(self):
+        """should return true when provided a valid Polygon object"""
+        test_data = gjtk.random.polygon()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_MultiPolygon(self):
-        """ should return true when provided a valid MultiPolygon object """
-        test_data = gjtk.random.MultiPolygon()
+    def test_multi_polygon(self):
+        """should return true when provided a valid MultiPolygon object"""
+        test_data = gjtk.random.multi_polygon()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_GeometryCollection(self):
-        """ should return true when provided a valid GeometryCollection object """
-        test_data = gjtk.random.GeometryCollection()
+    def test_geometry_collection(self):
+        """should return true when provided a valid GeometryCollection object"""
+        test_data = gjtk.random.geometry_collection()
         self.assertTrue(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -116,51 +120,55 @@ class isGeometryTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isGeometry(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isPositionTest (unittest.TestCase):
+class PositionTest(unittest.TestCase):
 
-    def test_valid_Position(self):
-        """ should return true when provided an array of at least 2 numbers """
-        test_data = gjtk.random.Position(max_numbers=6)
+    """Tests for Position Validation"""
+
+    def test_position(self):
+        """should return true when provided an array of at least 2 numbers"""
+        test_data = gjtk.random.position(max_numbers=6)
         self.assertTrue(
-            gjtk.validate.isPosition(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_position(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_too_short(self):
-        """ should return false when provided an array of less than 2 numbers """
+        """should return false when provided an array of less than 2 numbers"""
         test_data = [1]
         self.assertFalse(
-            gjtk.validate.isPosition(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_position(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_incorrect_type(self):
-        """ should return false when provided an array of at least 2 non-numbers """
+        """should return false when provided an array of at least 2 non-numbers"""
         test_data = ['foo', 'bar']
         self.assertFalse(
-            gjtk.validate.isPosition(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_position(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_mixed_types(self):
-        """ should return false when provided an array of a mix of at least 2 numbers and non-numbers """
+        """
+        should return false when provided an array of a mix of at least 2 numbers and non-numbers
+        """
         test_data = [1, 'a']
         random.shuffle(test_data)
         self.assertFalse(
-            gjtk.validate.isPosition(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_position(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -168,26 +176,28 @@ class isPositionTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isPosition(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_position(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isPointCoordinatesTest (unittest.TestCase):
+class PointCoordinatesTest(unittest.TestCase):
 
-    def test_valid_Point_coordinates(self):
-        """ should return true when provided valid GeoJSON Point coordinates """
-        test_data = gjtk.random.PointCoordinates()
+    """Tests for Point Coordinates Validation"""
+
+    def test_point_coordinates(self):
+        """should return true when provided valid GeoJSON Point coordinates"""
+        test_data = gjtk.random.point_coordinates()
         self.assertTrue(
-            gjtk.validate.isPointCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -195,200 +205,214 @@ class isPointCoordinatesTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isPointCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiPointCoordinatesTest (unittest.TestCase):
+class MultiPointCoordinatesTest(unittest.TestCase):
 
-    def test_valid_MultiPoint_coordinates(self):
-        """ should return true when provided valid GeoJSON MultiPoint coordinates """
-        test_data = gjtk.random.MultiPointCoordinates()
+    """Tests for MultiPoint Coordinates Validation"""
+
+    def test_multi_point_coordinates(self):
+        """should return true when provided valid GeoJSON MultiPoint coordinates"""
+        test_data = gjtk.random.multi_point_coordinates()
         self.assertTrue(
-            gjtk.validate.isMultiPointCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiPointCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isLineStringCoordinatesTest (unittest.TestCase):
+class LineStringCoordinatesTest(unittest.TestCase):
 
-    def test_valid_LineString_coordinates(self):
-        """ should return true when provided valid GeoJSON LineString coordinates """
-        test_data = gjtk.random.LineStringCoordinates()
+    """Tests for LineString Coordinates Validation"""
+
+    def test_line_string_coordinates(self):
+        """should return true when provided valid GeoJSON LineString coordinates"""
+        test_data = gjtk.random.line_string_coordinates()
         self.assertTrue(
-            gjtk.validate.isLineStringCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isLineStringCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isLinearRingCoordinatesTest (unittest.TestCase):
+class LinearRingCoordinatesTest(unittest.TestCase):
 
-    def test_valid_LinearRing_coordinates(self):
-        """ should return true when provided a valid GeoJSON LinearRing """
-        test_data = gjtk.random.LinearRingCoordinates()
+    """Tests for LinearRing Coordinates Validation"""
+
+    def test_linear_ring_coordinates(self):
+        """should return true when provided a valid GeoJSON LinearRing"""
+        test_data = gjtk.random.linear_ring_coordinates()
         self.assertTrue(
-            gjtk.validate.isLinearRingCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_linear_ring_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isLinearRingCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_linear_ring_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiLineStringCoordinatesTest (unittest.TestCase):
+class MultiLineStringCoordinatesTest(unittest.TestCase):
 
-    def test_valid_MultiLineString_coordinates(self):
-        """ should return true when provided valid GeoJSON MultiLineString coordinates """
-        test_data = gjtk.random.MultiLineStringCoordinates()
+    """Tests for MultiLineString Coordinates Validation"""
+
+    def test_multi_line_string_coordinates(self):  # pylint: disable=invalid-name
+        """should return true when provided valid GeoJSON MultiLineString coordinates"""
+        test_data = gjtk.random.multi_line_string_coordinates()
         self.assertTrue(
-            gjtk.validate.isMultiLineStringCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiLineStringCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isPolygonCoordinatesTest (unittest.TestCase):
+class PolygonCoordinatesTest(unittest.TestCase):
 
-    def test_valid_Polygon_coordinates(self):
-        """ should return true when provided valid GeoJSON Polygon coordinates """
-        test_data = gjtk.random.PolygonCoordinates()
+    """Tests for Polygon Coordinates Validation"""
+
+    def test_polygon_coordinates(self):
+        """should return true when provided valid GeoJSON Polygon coordinates"""
+        test_data = gjtk.random.polygon_coordinates()
         self.assertTrue(
-            gjtk.validate.isPolygonCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isPolygonCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiPolygonCoordinatesTest (unittest.TestCase):
+class MultiPolygonCoordinatesTest(unittest.TestCase):
 
-    def test_valid_MultiPolygon_coordinates(self):
-        """ should return true when provided valid GeoJSON MultiPolygon coordinates """
-        test_data = gjtk.random.MultiPolygonCoordinates()
+    """Tests for MultiPolygon Coordinates Validation"""
+
+    def test_multi_polygon_coordinates(self):
+        """should return true when provided valid GeoJSON MultiPolygon coordinates"""
+        test_data = gjtk.random.multi_polygon_coordinates()
         self.assertTrue(
-            gjtk.validate.isMultiPolygonCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             {},
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiPolygonCoordinates(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon_coordinates(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isPointTest (unittest.TestCase):
+class PointTest(unittest.TestCase):
 
-    def test_valid_Point(self):
-        """ should return true when provided a valid Point object """
-        test_data = gjtk.random.Point()
+    """Tests for Point Validation"""
+
+    def test_point(self):
+        """should return true when provided a valid Point object"""
+        test_data = gjtk.random.point()
         self.assertTrue(
-            gjtk.validate.isPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a Point object without a type """
-        test_data = gjtk.random.Point()
+        """should return false when provided a Point object without a type"""
+        test_data = gjtk.random.point()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a Point object without coordinates """
-        test_data = gjtk.random.Point()
+        """should return false when provided a Point object without coordinates"""
+        test_data = gjtk.random.point()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -396,44 +420,46 @@ class isPointTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiPointTest (unittest.TestCase):
+class MultiPointTest(unittest.TestCase):
 
-    def test_valid_MultiPoint(self):
-        """ should return true when provided a valid MultiPoint object """
-        test_data = gjtk.random.MultiPoint()
+    """Tests for MultiPoint Validation"""
+
+    def test_multi_point(self):
+        """should return true when provided a valid MultiPoint object"""
+        test_data = gjtk.random.multi_point()
         self.assertTrue(
-            gjtk.validate.isMultiPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a MultiPoint object without a type """
-        test_data = gjtk.random.MultiPoint()
+        """should return false when provided a MultiPoint object without a type"""
+        test_data = gjtk.random.multi_point()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isMultiPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a MultiPoint object without coordinates """
-        test_data = gjtk.random.MultiPoint()
+        """should return false when provided a MultiPoint object without coordinates"""
+        test_data = gjtk.random.multi_point()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isMultiPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -441,44 +467,46 @@ class isMultiPointTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiPoint(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_point(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isLineStringTest (unittest.TestCase):
+class LineStringTest(unittest.TestCase):
 
-    def test_valid_LineString(self):
-        """ should return true when provided a valid LineString object """
-        test_data = gjtk.random.LineString()
+    """Tests for LineString Validation"""
+
+    def test_line_string(self):
+        """should return true when provided a valid LineString object"""
+        test_data = gjtk.random.line_string()
         self.assertTrue(
-            gjtk.validate.isLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a LineString object without a type """
-        test_data = gjtk.random.LineString()
+        """should return false when provided a LineString object without a type"""
+        test_data = gjtk.random.line_string()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a LineString object without coordinates """
-        test_data = gjtk.random.LineString()
+        """should return false when provided a LineString object without coordinates"""
+        test_data = gjtk.random.line_string()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -486,44 +514,46 @@ class isLineStringTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiLineStringTest (unittest.TestCase):
+class MultiLineStringTest(unittest.TestCase):
 
-    def test_valid_MultiLineString(self):
-        """ should return true when provided a valid MultiLineString object """
-        test_data = gjtk.random.MultiLineString()
+    """Tests for MultiLineString Validation"""
+
+    def test_multi_line_string(self):
+        """should return true when provided a valid MultiLineString object"""
+        test_data = gjtk.random.multi_line_string()
         self.assertTrue(
-            gjtk.validate.isMultiLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a MultiLineString object without a type """
-        test_data = gjtk.random.MultiLineString()
+        """should return false when provided a MultiLineString object without a type"""
+        test_data = gjtk.random.multi_line_string()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isMultiLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a MultiLineString object without coordinates """
-        test_data = gjtk.random.MultiLineString()
+        """should return false when provided a MultiLineString object without coordinates"""
+        test_data = gjtk.random.multi_line_string()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isMultiLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -531,44 +561,46 @@ class isMultiLineStringTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiLineString(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_line_string(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isPolygonTest (unittest.TestCase):
+class PolygonTest(unittest.TestCase):
 
-    def test_valid_Polygon(self):
-        """ should return true when provided a valid Polygon object """
-        test_data = gjtk.random.Polygon()
+    """Tests for Polygon Validation"""
+
+    def test_polygon(self):
+        """should return true when provided a valid Polygon object"""
+        test_data = gjtk.random.polygon()
         self.assertTrue(
-            gjtk.validate.isPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a Polygon object without a type """
-        test_data = gjtk.random.Polygon()
+        """should return false when provided a Polygon object without a type"""
+        test_data = gjtk.random.polygon()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a Polygon object without coordinates """
-        test_data = gjtk.random.Polygon()
+        """should return false when provided a Polygon object without coordinates"""
+        test_data = gjtk.random.polygon()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -576,44 +608,46 @@ class isPolygonTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isMultiPolygonTest (unittest.TestCase):
+class MultiPolygonTest(unittest.TestCase):
 
-    def test_valid_MultiPolygon(self):
-        """ should return true when provided a valid MultiPolygon object """
-        test_data = gjtk.random.MultiPolygon()
+    """Tests for MultiPolygon Validation"""
+
+    def test_multi_polygon(self):
+        """should return true when provided a valid MultiPolygon object"""
+        test_data = gjtk.random.multi_polygon()
         self.assertTrue(
-            gjtk.validate.isMultiPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a MultiPolygon object without a type """
-        test_data = gjtk.random.MultiPolygon()
+        """should return false when provided a MultiPolygon object without a type"""
+        test_data = gjtk.random.multi_polygon()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isMultiPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_coordinates(self):
-        """ should return false when provided a MultiPolygon object without coordinates """
-        test_data = gjtk.random.MultiPolygon()
+        """should return false when provided a MultiPolygon object without coordinates"""
+        test_data = gjtk.random.multi_polygon()
         del test_data['coordinates']
         self.assertFalse(
-            gjtk.validate.isMultiPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -621,44 +655,46 @@ class isMultiPolygonTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isMultiPolygon(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_multi_polygon(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isGeometryCollectionTest (unittest.TestCase):
+class GeometryCollectionTest(unittest.TestCase):
 
-    def test_valid_GeometryCollection(self):
-        """ should return true when provided a valid GeometryCollection object """
-        test_data = gjtk.random.GeometryCollection()
+    """Tests for GeometryCollection Validation"""
+
+    def test_geometry_collection(self):
+        """should return true when provided a valid GeometryCollection object"""
+        test_data = gjtk.random.geometry_collection()
         self.assertTrue(
-            gjtk.validate.isGeometryCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a GeometryCollection object without a type """
-        test_data = gjtk.random.GeometryCollection()
+        """should return false when provided a GeometryCollection object without a type"""
+        test_data = gjtk.random.geometry_collection()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isGeometryCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_geometries(self):
-        """ should return false when provided a GeometryCollection object without geometries """
-        test_data = gjtk.random.GeometryCollection()
+        """should return false when provided a GeometryCollection object without geometries"""
+        test_data = gjtk.random.geometry_collection()
         del test_data['geometries']
         self.assertFalse(
-            gjtk.validate.isGeometryCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -666,44 +702,46 @@ class isGeometryCollectionTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isGeometryCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_geometry_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isFeatureTest (unittest.TestCase):
+class FeatureTest(unittest.TestCase):
 
-    def test_valid_Feature(self):
-        """ should return true when provided a valid Feature object """
-        test_data = gjtk.random.Feature()
+    """Tests for Feature Validation"""
+
+    def test_feature(self):
+        """should return true when provided a valid Feature object"""
+        test_data = gjtk.random.feature()
         self.assertTrue(
-            gjtk.validate.isFeature(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a Feature object without a type """
-        test_data = gjtk.random.Feature()
+        """should return false when provided a Feature object without a type"""
+        test_data = gjtk.random.feature()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isFeature(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_geometry(self):
-        """ should return false when provided a Feature object without geometry """
-        test_data = gjtk.random.Feature()
+        """should return false when provided a Feature object without geometry"""
+        test_data = gjtk.random.feature()
         del test_data['geometry']
         self.assertFalse(
-            gjtk.validate.isFeature(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -711,44 +749,46 @@ class isFeatureTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isFeature(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isFeatureCollectionTest (unittest.TestCase):
+class FeatureCollectionTest(unittest.TestCase):
 
-    def test_valid_FeatureCollection(self):
-        """ should return true when provided a valid FeatureCollection object """
-        test_data = gjtk.random.FeatureCollection()
+    """Tests for FeatureCollection Validation"""
+
+    def test_feature_collection(self):
+        """should return true when provided a valid FeatureCollection object"""
+        test_data = gjtk.random.feature_collection()
         self.assertTrue(
-            gjtk.validate.isFeatureCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a FeatureCollection object without a type """
-        test_data = gjtk.random.FeatureCollection()
+        """should return false when provided a FeatureCollection object without a type"""
+        test_data = gjtk.random.feature_collection()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isFeatureCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_features(self):
-        """ should return false when provided a FeatureCollection object without features """
-        test_data = gjtk.random.FeatureCollection()
+        """should return false when provided a FeatureCollection object without features"""
+        test_data = gjtk.random.feature_collection()
         del test_data['features']
         self.assertFalse(
-            gjtk.validate.isFeatureCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -756,44 +796,46 @@ class isFeatureCollectionTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isFeatureCollection(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_feature_collection(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isCRSTest (unittest.TestCase):
+class CRSTest(unittest.TestCase):
 
-    def test_valid_CRS(self):
-        """ should return true when provided a valid CRS object """
-        test_data = gjtk.random.CRS()
+    """Tests for CRS Validation"""
+
+    def test_crs(self):
+        """should return true when provided a valid CRS object"""
+        test_data = gjtk.random.crs()
         self.assertTrue(
-            gjtk.validate.isCRS(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_crs(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return false when provided a CRS object without a type """
-        test_data = gjtk.random.CRS()
+        """should return false when provided a CRS object without a type"""
+        test_data = gjtk.random.crs()
         del test_data['type']
         self.assertFalse(
-            gjtk.validate.isCRS(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_crs(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_properties(self):
-        """ should return false when provided a CRS object without properties """
-        test_data = gjtk.random.CRS()
+        """should return false when provided a CRS object without properties"""
+        test_data = gjtk.random.crs()
         del test_data['properties']
         self.assertFalse(
-            gjtk.validate.isCRS(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_crs(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -801,91 +843,94 @@ class isCRSTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isCRS(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_crs(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class hasCRSTest (unittest.TestCase):
+class HasCRSTest(unittest.TestCase):
 
-    def test_valid_Geometry_CRS(self):
-        """ should return true when provided a Geometry with a valid CRS """
-        test_data = gjtk.random.Geometry()
-        test_data['crs'] = gjtk.random.CRS()
+    """Tests for CRS Presence Validation"""
+
+    def test_geometry_crs(self):
+        """should return true when provided a Geometry with a valid CRS"""
+        test_data = gjtk.random.geometry()
+        test_data['crs'] = gjtk.random.crs()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_Feature_CRS(self):
-        """ should return true when provided a Feature with a valid CRS """
-        test_data = gjtk.random.Feature()
-        test_data['crs'] = gjtk.random.CRS()
+    def test_feature_crs(self):
+        """should return true when provided a Feature with a valid CRS"""
+        test_data = gjtk.random.feature()
+        test_data['crs'] = gjtk.random.crs()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_FeatureCollection_CRS(self):
-        """ should return true when provided a FeatureCollection with a valid CRS """
-        test_data = gjtk.random.FeatureCollection()
-        test_data['crs'] = gjtk.random.CRS()
+    def test_feature_collection_crs(self):
+        """should return true when provided a FeatureCollection with a valid CRS"""
+        test_data = gjtk.random.feature_collection()
+        test_data['crs'] = gjtk.random.crs()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.hasCRS(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_crs(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
+class LinkTest(unittest.TestCase):
 
-class isLinkTest (unittest.TestCase):
+    """Tests for Link Validation"""
 
-    def test_valid_Link(self):
-        """ should return true when provided a valid Link object """
-        test_data = gjtk.random.Link()
+    def test_link(self):
+        """should return true when provided a valid Link object"""
+        test_data = gjtk.random.link()
         self.assertTrue(
-            gjtk.validate.isLink(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_link(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_type(self):
-        """ should return true when provided a Link object without a type """
-        test_data = gjtk.random.Link()
-        if test_data.has_key('type'):
+        """should return true when provided a Link object without a type"""
+        test_data = gjtk.random.link()
+        if 'type' in test_data:
             del test_data['type']
         self.assertTrue(
-            gjtk.validate.isLink(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_link(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_no_href(self):
-        """ should return false when provided a Link object without href """
-        test_data = gjtk.random.Link()
+        """should return false when provided a Link object without href"""
+        test_data = gjtk.random.link()
         del test_data['href']
         self.assertFalse(
-            gjtk.validate.isLink(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_link(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -893,26 +938,28 @@ class isLinkTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isLink(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_link(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class isBboxTest (unittest.TestCase):
+class BBoxTest(unittest.TestCase):
 
-    def test_valid_Bbox(self):
-        """ should return true when provided a valid Bbox """
-        test_data = gjtk.random.Bbox()
+    """Tests for BBox Validation"""
+
+    def test_bbox(self):
+        """should return true when provided a valid Bbox"""
+        test_data = gjtk.random.bbox()
         self.assertTrue(
-            gjtk.validate.isBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
@@ -920,99 +967,107 @@ class isBboxTest (unittest.TestCase):
             {},
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.isBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.is_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-class hasBboxTest (unittest.TestCase):
+class HasBboxTest(unittest.TestCase):
 
-    def test_valid_Geometry_Bbox(self):
-        """ should return true when provided a Geometry with a valid Bbox """
-        test_data = gjtk.random.Geometry()
-        test_data['bbox'] = gjtk.random.Bbox()
+    """Tests for BBox Presence Validation"""
+
+    def test_geometry_bbox(self):
+        """should return true when provided a Geometry with a valid Bbox"""
+        test_data = gjtk.random.geometry()
+        test_data['bbox'] = gjtk.random.bbox()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_Feature_Bbox(self):
-        """ should return true when provided a Feature with a valid Bbox """
-        test_data = gjtk.random.Feature()
-        test_data['bbox'] = gjtk.random.Bbox()
+    def test_feature_bbox(self):
+        """should return true when provided a Feature with a valid Bbox"""
+        test_data = gjtk.random.feature()
+        test_data['bbox'] = gjtk.random.bbox()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
-    def test_valid_FeatureCollection_Bbox(self):
-        """ should return true when provided a FeatureCollection with a valid Bbox """
-        test_data = gjtk.random.FeatureCollection()
-        test_data['bbox'] = gjtk.random.Bbox()
+    def test_feature_collection_bbox(self):
+        """should return true when provided a FeatureCollection with a valid Bbox"""
+        test_data = gjtk.random.feature_collection()
+        test_data['bbox'] = gjtk.random.bbox()
         self.assertTrue(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_invalid(self):
-        """ should return false when provided an invalid object """
+        """should return false when provided an invalid object"""
         test_data = random.choice([
             True,
             0,
             '',
             [],
             random.choice,
-            None
+            None,
         ])
         self.assertFalse(
-            gjtk.validate.hasBbox(test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.has_bbox(test_data),
+            gjtk.test.error_message(test_data),
         )
 
 
-##################################################################### COMPARISON
+# COMPARISON
 
 
-class equalPositions (unittest.TestCase):
+class EqualPositionsTest(unittest.TestCase):
+
+    """Tests for Position Equality Validation"""
 
     def test_same(self):
-        """ should return true when provided identical Positions """
-        test_data = gjtk.random.Position(max_numbers=6)
+        """should return true when provided identical Positions"""
+        test_data = gjtk.random.position(max_numbers=6)
         self.assertTrue(
-            gjtk.validate.equalPositions(test_data, test_data),
-            gjtk.test.error_message(test_data)
+            gjtk.validate.equal_positions(test_data, test_data),
+            gjtk.test.error_message(test_data),
         )
 
     def test_diff(self):
-        """ should return false when provided different Positions """
-        test_data1 = gjtk.random.Position(max_numbers=6)
-        test_data2 = gjtk.random.Position(max_numbers=6)
+        """should return false when provided different Positions"""
+        test_data1 = gjtk.random.position(max_numbers=6)
+        test_data2 = gjtk.random.position(max_numbers=6)
         while test_data1[0] == test_data2[0]:
-            gjtk.random.Position(max_numbers=6)
+            gjtk.random.position(max_numbers=6)
         self.assertFalse(
-            gjtk.validate.equalPositions(test_data1, test_data2),
-            gjtk.test.error_message([test_data1, test_data2])
+            gjtk.validate.equal_positions(test_data1, test_data2),
+            gjtk.test.error_message([test_data1, test_data2]),
         )
 
 
-class containedPolygon (unittest.TestCase):
+class ContainedPolygonTest(unittest.TestCase):
+
+    """Tests for Containg Polygon Validation"""
 
     def setUp(self):
         self.inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]]
         self.outer = [[0, 0], [0, 5], [5, 5], [5, 0], [0, 0]]
-    
+
     def test_contained(self):
-        """ should return true when provided a LinearRing that contains another LinearRing. """
-        self.assertTrue(gjtk.validate.containedPolygon(self.inner, self.outer))
+        """should return true when provided a LinearRing that contains another LinearRing."""
+        self.assertTrue(gjtk.validate.contained_polygon(self.inner, self.outer))
 
     def test_not_contained(self):
-        """ should return false when provided a LinearRing that does not contain another LinearRing. """
-        self.assertFalse(gjtk.validate.containedPolygon(self.outer, self.inner))
+        """
+        should return false when provided a LinearRing that does not contain another LinearRing.
+        """
+        self.assertFalse(gjtk.validate.contained_polygon(self.outer, self.inner))
 
 
+# pylint: disable=too-many-lines
 if __name__ == "__main__":
     unittest.main()
-

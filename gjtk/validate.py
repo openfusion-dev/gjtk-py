@@ -1,44 +1,48 @@
+"""Validate GeoJSON objects."""
 
+from __future__ import absolute_import
 
-from matplotlib.path import Path
 from numbers import Number
+from matplotlib.path import Path
 
 
 def boolean_fail(f):
+    """Decorate a validation function."""
     def wrapped_f(*args, **kwargs):
+        """Return False if an exception is raised."""
         try:
             return f(*args, **kwargs)
-        except:
+        except:  # pylint: disable=bare-except
             return False
     return wrapped_f
 
 
 @boolean_fail
-def isGeoJSON(anything):
+def is_geojson(anything):
     """ Validate a GeoJSON object. """
     return (
-        isGeometry(anything) or
-        isFeature(anything) or
-        isFeatureCollection(anything)
+        is_geometry(anything) or
+        is_feature(anything) or
+        is_feature_collection(anything)
     )
 
 
 @boolean_fail
-def isGeometry(anything):
+def is_geometry(anything):
     """ Validate a GeoJSON Geometry. """
     return (
-        isPoint(anything) or
-        isMultiPoint(anything) or
-        isLineString(anything) or
-        isMultiLineString(anything) or
-        isPolygon(anything) or
-        isMultiPolygon(anything) or
-        isGeometryCollection(anything)
+        is_point(anything) or
+        is_multi_point(anything) or
+        is_line_string(anything) or
+        is_multi_line_string(anything) or
+        is_polygon(anything) or
+        is_multi_polygon(anything) or
+        is_geometry_collection(anything)
     )
 
 
 @boolean_fail
-def isPosition(anything):
+def is_position(anything):
     """ Validate a GeoJSON Position. """
     return (
         isinstance(anything, list) and
@@ -48,190 +52,190 @@ def isPosition(anything):
 
 
 @boolean_fail
-def isPointCoordinates(anything):
+def is_point_coordinates(anything):
     """ Validate the coordinates of a GeoJSON Point. """
-    return isPosition(anything)
+    return is_position(anything)
 
 
 @boolean_fail
-def isMultiPointCoordinates(anything):
+def is_multi_point_coordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPoint. """
     return (
         isinstance(anything, list) and
-        all(isPosition(position) for position in anything)
+        all(is_position(position) for position in anything)
     )
 
 
 @boolean_fail
-def isLineStringCoordinates(anything):
+def is_line_string_coordinates(anything):
     """ Validate the coordinates of a GeoJSON LineString. """
     return (
         isinstance(anything, list) and
         len(anything) > 1 and
-        all(isPosition(position) for position in anything)
+        all(is_position(position) for position in anything)
     )
 
 
 @boolean_fail
-def isLinearRingCoordinates(anything):
+def is_linear_ring_coordinates(anything):
     """ Validate a GeoJSON LinearRing. """
     return (
         isinstance(anything, list) and
         len(anything) > 3 and
-        isLineStringCoordinates(anything) and
-        equalPositions(anything[0],anything[len(anything)-1])
+        is_line_string_coordinates(anything) and
+        equal_positions(anything[0], anything[len(anything)-1])
     )
 
 
 @boolean_fail
-def isMultiLineStringCoordinates(anything):
+def is_multi_line_string_coordinates(anything):  # pylint: disable=invalid-name
     """ Validate the coordinates of a GeoJSON MultiLineString. """
     return (
         isinstance(anything, list) and
-        all(isLineStringCoordinates(line_string_coords) for line_string_coords in anything)
+        all(is_line_string_coordinates(line_string_coords) for line_string_coords in anything)
     )
 
 
 @boolean_fail
-def isPolygonCoordinates(anything):
+def is_polygon_coordinates(anything):
     """ Validate the coordinates of a GeoJSON Polygon. """
     if not isinstance(anything, list):
         return False
     prev = None
     for linear_ring in anything:
-        if not isLinearRingCoordinates(linear_ring):
+        if not is_linear_ring_coordinates(linear_ring):
             return False
-        if prev is not None and not containedPolygon(linear_ring, prev):
+        if prev is not None and not contained_polygon(linear_ring, prev):
             return False
         prev = linear_ring
     return True
 
 
 @boolean_fail
-def isMultiPolygonCoordinates(anything):
+def is_multi_polygon_coordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiPolygon. """
     return (
         isinstance(anything, list) and
-        all(isPolygonCoordinates(polygon_coords) for polygon_coords in anything)
+        all(is_polygon_coordinates(polygon_coords) for polygon_coords in anything)
     )
 
 
 @boolean_fail
-def isPoint(anything):
+def is_point(anything):
     """ Validate a GeoJSON Point. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "Point" and
-        isPointCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_point_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isMultiPoint(anything):
+def is_multi_point(anything):
     """ Validate a GeoJSON MultiPoint. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "MultiPoint" and
-        isMultiPointCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_multi_point_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isLineString(anything):
+def is_line_string(anything):
     """ Validate a GeoJSON LineString. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "LineString" and
-        isLineStringCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_line_string_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isMultiLineString(anything):
+def is_multi_line_string(anything):
     """ Validate a GeoJSON MultiLineString. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "MultiLineString" and
-        isMultiLineStringCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_multi_line_string_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isPolygon(anything):
+def is_polygon(anything):
     """ Validate a GeoJSON Polygon. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "Polygon" and
-        isPolygonCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_polygon_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isMultiPolygon(anything):
+def is_multi_polygon(anything):
     """ Validate a GeoJSON MultiPolygon. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "MultiPolygon" and
-        isMultiPolygonCoordinates(anything.get("coordinates")) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        is_multi_polygon_coordinates(anything.get("coordinates")) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isGeometryCollection(anything):
+def is_geometry_collection(anything):
     """ Validate a GeoJSON GeometryCollection. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "GeometryCollection" and
-        anything.has_key("geometries") and
-        all(isGeometry(geometry) for geometry in anything["geometries"]) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        ("geometries" in anything) and
+        all(is_geometry(geometry) for geometry in anything["geometries"]) and
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isFeature(anything):
+def is_feature(anything):
     """ Validate a GeoJSON Feature. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "Feature" and
-        anything.has_key("geometry") and
+        ("geometry" in anything) and
         (
             anything["geometry"] is None or
-            isGeometry(anything["geometry"])
+            is_geometry(anything["geometry"])
         ) and
-        hasCRS(anything) and
-        hasBbox(anything)
+        has_crs(anything) and
+        has_bbox(anything)
     )
 
 
 @boolean_fail
-def isFeatureCollection(anything):
+def is_feature_collection(anything):
     """ Validate a GeoJSON FeatureCollection. """
     return (
         isinstance(anything, dict) and
         anything.get("type") == "FeatureCollection" and
-        anything.has_key("features") and
-        all(isFeature(feature) for feature in anything.get("features")) and
-        hasCRS(anything) and
-        hasBbox(anything)
-    );
+        ("features" in anything) and
+        all(is_feature(feature) for feature in anything.get("features")) and
+        has_crs(anything) and
+        has_bbox(anything)
+    )
 
 
 @boolean_fail
-def isCRS(anything):
+def is_crs(anything):
     """ Validate a GeoJSON Coordinate Reference System. """
     return (
         isinstance(anything, dict) and
@@ -243,29 +247,29 @@ def isCRS(anything):
             ) or
             (
                 anything.get("type") == "link" and
-                isLink(anything.get("properties"))
+                is_link(anything.get("properties"))
             )
         )
     )
 
 
 @boolean_fail
-def hasCRS(anything, required=False):
+def has_crs(anything, required=False):
     """ Validate the crs property of a GeoJSON object. """
     return (
         isinstance(anything, dict) and
-        isCRS(anything.get("crs"))
+        is_crs(anything.get("crs"))
     ) if required else (
         isinstance(anything, dict) and
         (
             anything.get("crs") is None or
-            isCRS(anything["crs"])
+            is_crs(anything["crs"])
         )
     )
 
 
 @boolean_fail
-def isLink(anything):
+def is_link(anything):
     """ Validate a GeoJSON Link. """
     return (
         isinstance(anything, dict) and
@@ -278,11 +282,11 @@ def isLink(anything):
 
 
 @boolean_fail
-def isBbox(anything):
+def is_bbox(anything):
     """ Validate a GeoJSON Bounding Box. """
-    if not isinstance(anything, list) or len(anything) < 1 or len(anything)%2 != 0:
+    if not isinstance(anything, list) or len(anything) < 1 or len(anything) % 2 != 0:
         return False
-    pivot = len(anything)/2
+    pivot = len(anything) / 2
     for i in range(pivot):
         if anything[i] > anything[i+pivot]:
             return False
@@ -290,51 +294,35 @@ def isBbox(anything):
 
 
 @boolean_fail
-def hasBbox(anything, required=False):
+def has_bbox(anything, required=False):
     """ Validate the bbox property of a GeoJSON object. """
     return (
         isinstance(anything, dict) and
-        isBbox(anything.get("bbox"))
+        is_bbox(anything.get("bbox"))
     ) if required else (
         isinstance(anything, dict) and
         (
             anything.get("bbox") is None or
-            isBbox(anything["bbox"])
+            is_bbox(anything["bbox"])
         )
     )
 
 
-##################################################################### COMPARISON
+# COMPARISON
 
 
 @boolean_fail
-def equalPositions(a, b):
+def equal_positions(this, that):
     """ Compare two GeoJSON Positions for equality. """
     return (
-        isPosition(a) and isPosition(b) and
-        len(a) == len(b) and
-        all(a[i] == b[i] for i in range(len(a)))
+        is_position(this) and is_position(that) and
+        len(this) == len(that) and
+        all(this[i] == that[i] for i in range(len(this)))
     )
 
 
 @boolean_fail
-def containedPolygon(inner, outer):
+def contained_polygon(inner, outer):
     """ Determine whether one GeoJSON LinearRing contains another. """
     outer_path = Path(outer)
     return all(outer_path.contains_point([position[0], position[1]]) for position in inner)
-
-
-##################################################################### DEPRECATED
-
-
-@boolean_fail
-def validCRS(anything):
-    """ DEPRECATED: Use hasCRS instead. """
-    return hasCRS(anything)
-
-
-@boolean_fail
-def validBbox(anything):
-    """ DEPRECATED: Use hasBbox instead. """
-    return hasBbox(anything)
-

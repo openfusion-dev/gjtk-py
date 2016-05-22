@@ -1,199 +1,204 @@
-
+"""Tests for GeoJSON ToolKit Extraction Utilities"""
 
 import unittest
 
 import gjtk
 
 
-class positionsOfTest (unittest.TestCase):
+class ExtractPositionsTest(unittest.TestCase):
 
-    def test_valid_Point(self):
-        """ should return valid positions when provided a valid Point """
-        test_data = gjtk.random.Point()
-        test_result = gjtk.extract.positionsOf(test_data)
+    """Tests for Position Extraction"""
+
+    def test_valid_point(self):
+        """should return valid positions when provided a valid Point"""
+        test_data = gjtk.random.point()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_MultiPoint(self):
-        """ should return valid positions when provided a valid MultiPoint """
-        test_data = gjtk.random.MultiPoint()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_multi_point(self):
+        """should return valid positions when provided a valid MultiPoint"""
+        test_data = gjtk.random.multi_point()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_LineString(self):
-        """ should return valid positions when provided a valid LineString """
-        test_data = gjtk.random.LineString()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_line_string(self):
+        """should return valid positions when provided a valid LineString"""
+        test_data = gjtk.random.line_string()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_MultiLineString(self):
-        """ should return valid positions when provided a valid MultiLineString """
-        test_data = gjtk.random.MultiLineString()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_multi_line_string(self):
+        """should return valid positions when provided a valid MultiLineString"""
+        test_data = gjtk.random.multi_line_string()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_Polygon(self):
-        """ should return valid positions when provided a valid Polygon """
-        test_data = gjtk.random.Polygon()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_polygon(self):
+        """should return valid positions when provided a valid Polygon"""
+        test_data = gjtk.random.polygon()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_MultiPolygon(self):
-        """ should return valid positions when provided a valid MultiPolygon """
-        test_data = gjtk.random.MultiPolygon()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_multi_polygon(self):
+        """should return valid positions when provided a valid MultiPolygon"""
+        test_data = gjtk.random.multi_polygon()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_GeometryCollection(self):
-        """ should return valid positions when provided a valid GeometryCollection """
-        test_data = gjtk.random.GeometryCollection()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_geometry_collection(self):
+        """should return valid positions when provided a valid GeometryCollection"""
+        test_data = gjtk.random.geometry_collection()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_Feature(self):
-        """ should return valid positions when provided a valid Feature """
-        test_data = gjtk.random.Feature()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_feature(self):
+        """should return valid positions when provided a valid Feature"""
+        test_data = gjtk.random.feature()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
-    def test_valid_FeatureCollection(self):
-        """ should return valid positions when provided a valid FeatureCollection """
-        test_data = gjtk.random.FeatureCollection()
-        test_result = gjtk.extract.positionsOf(test_data)
+    def test_valid_feature_collection(self):
+        """should return valid positions when provided a valid FeatureCollection"""
+        test_data = gjtk.random.feature_collection()
+        test_result = gjtk.extract.positions_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isPosition(position) for position in test_result),
-            gjtk.test.error_message(test_data, test_result)
-        )
-
-
-class featureOfTest (unittest.TestCase):
-
-    def test_valid_Feature(self):
-        """ should return valid features when provided a valid Feature """
-        test_data = gjtk.random.Feature()
-        test_result = gjtk.extract.featuresOf(test_data)
-        self.assertTrue(
-            all(gjtk.validate.isFeature(feature) for feature in test_result),
-            gjtk.test.error_message(test_data, test_result)
-        )
-
-    def test_valid_FeatureCollection(self):
-        """ should return valid features when provided a valid FeatureCollection """
-        test_data = gjtk.random.FeatureCollection()
-        test_result = gjtk.extract.featuresOf(test_data)
-        self.assertTrue(
-            all(gjtk.validate.isFeature(feature) for feature in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_position(position) for position in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
 
-class geometriesOf (unittest.TestCase):
+class ExtractFeaturesTest(unittest.TestCase):
 
-    def test_valid_Point(self):
-        """ should return valid geometries when provided a valid Point """
-        test_data = gjtk.random.Point()
-        test_result = gjtk.extract.geometriesOf(test_data)
+    """Tests for Feature Extraction"""
+
+    def test_valid_feature(self):
+        """should return valid features when provided a valid Feature"""
+        test_data = gjtk.random.feature()
+        test_result = gjtk.extract.features_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_feature(feature) for feature in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_MultiPoint(self):
-        """ should return valid geometries when provided a valid MultiPoint """
-        test_data = gjtk.random.MultiPoint()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_feature_collection(self):
+        """should return valid features when provided a valid FeatureCollection"""
+        test_data = gjtk.random.feature_collection()
+        test_result = gjtk.extract.features_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_feature(feature) for feature in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_LineString(self):
-        """ should return valid geometries when provided a valid LineString """
-        test_data = gjtk.random.LineString()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+
+class ExtractGeometriesTest(unittest.TestCase):
+
+    """Tests for Geometry Extraction"""
+
+    def test_valid_point(self):
+        """should return valid geometries when provided a valid Point"""
+        test_data = gjtk.random.point()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_MultiLineString(self):
-        """ should return valid geometries when provided a valid MultiLineString """
-        test_data = gjtk.random.MultiLineString()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_multi_point(self):
+        """should return valid geometries when provided a valid MultiPoint"""
+        test_data = gjtk.random.multi_point()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_Polygon(self):
-        """ should return valid geometries when provided a valid Polygon """
-        test_data = gjtk.random.Polygon()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_line_string(self):
+        """should return valid geometries when provided a valid LineString"""
+        test_data = gjtk.random.line_string()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_MultiPolygon(self):
-        """ should return valid geometries when provided a valid MultiPolygon """
-        test_data = gjtk.random.MultiPolygon()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_multi_line_string(self):
+        """should return valid geometries when provided a valid MultiLineString"""
+        test_data = gjtk.random.multi_line_string()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_GeometryCollection(self):
-        """ should return valid geometries when provided a valid GeometryCollection """
-        test_data = gjtk.random.GeometryCollection()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_polygon(self):
+        """should return valid geometries when provided a valid Polygon"""
+        test_data = gjtk.random.polygon()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_Feature(self):
-        """ should return valid geometries when provided a valid Feature """
-        test_data = gjtk.random.Feature()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_multi_polygon(self):
+        """should return valid geometries when provided a valid MultiPolygon"""
+        test_data = gjtk.random.multi_polygon()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
-    
-    def test_valid_FeatureCollection(self):
-        """ should return valid geometries when provided a valid FeatureCollection """
-        test_data = gjtk.random.FeatureCollection()
-        test_result = gjtk.extract.geometriesOf(test_data)
+
+    def test_valid_geometry_collection(self):
+        """should return valid geometries when provided a valid GeometryCollection"""
+        test_data = gjtk.random.geometry_collection()
+        test_result = gjtk.extract.geometries_of(test_data)
         self.assertTrue(
-            all(gjtk.validate.isGeometry(geometry) for geometry in test_result),
-            gjtk.test.error_message(test_data, test_result)
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
+        )
+
+    def test_valid_feature(self):
+        """should return valid geometries when provided a valid Feature"""
+        test_data = gjtk.random.feature()
+        test_result = gjtk.extract.geometries_of(test_data)
+        self.assertTrue(
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
+        )
+
+    def test_valid_feature_collection(self):
+        """should return valid geometries when provided a valid FeatureCollection"""
+        test_data = gjtk.random.feature_collection()
+        test_result = gjtk.extract.geometries_of(test_data)
+        self.assertTrue(
+            all(gjtk.validate.is_geometry(geometry) for geometry in test_result),
+            gjtk.test.error_message(test_data, test_result),
         )
 
 
 if __name__ == "__main__":
     unittest.main()
-

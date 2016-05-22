@@ -1,74 +1,74 @@
+"""Generate GeoJSON objects from their components."""
 
 
-def Point(position):
-    """ Create a valid GeoJSON Point. """
+def point(position):
+    """Create a valid GeoJSON Point."""
     return {
-       "type": "Point",
-       "coordinates": position
+        "type": "Point",
+        "coordinates": position,
     }
 
 
-def MultiPoint(coordinates=None):
-    """ Create a valid GeoJSON MultiPoint. """
+def multi_point(coordinates=None):
+    """Create a valid GeoJSON MultiPoint."""
     return {
-       "type": "MultiPoint",
-       "coordinates": [] if coordinates is None else coordinates
+        "type": "MultiPoint",
+        "coordinates": [] if coordinates is None else coordinates,
     }
 
 
-def LineString(coordinates):
-    """ Create a valid GeoJSON LineString. """
+def line_string(coordinates):
+    """Create a valid GeoJSON LineString."""
     return {
-       "type": "LineString",
-       "coordinates": coordinates
+        "type": "LineString",
+        "coordinates": coordinates,
     }
 
 
-def MultiLineString(coordinates=None):
-    """ Create a valid GeoJSON MultiLineString. """
+def multi_line_string(coordinates=None):
+    """Create a valid GeoJSON MultiLineString."""
     return {
-       "type": "MultiLineString",
-       "coordinates": [] if coordinates is None else coordinates
+        "type": "MultiLineString",
+        "coordinates": [] if coordinates is None else coordinates,
     }
 
 
-def Polygon(coordinates):
-    """ Create a valid GeoJSON Polygon. """
+def polygon(coordinates):
+    """Create a valid GeoJSON Polygon."""
     return {
-       "type": "Polygon",
-       "coordinates": coordinates
+        "type": "Polygon",
+        "coordinates": coordinates,
     }
 
 
-def MultiPolygon(coordinates=None):
-    """ Create a valid GeoJSON MultiPolygon. """
+def multi_polygon(coordinates=None):
+    """Create a valid GeoJSON MultiPolygon."""
     return {
-       "type": "MultiPolygon",
-       "coordinates": [] if coordinates is None else coordinates
+        "type": "MultiPolygon",
+        "coordinates": [] if coordinates is None else coordinates,
     }
 
 
-def GeometryCollection(geometries=None):
-    """ Create a valid GeoJSON GeometryCollection. """
+def geometry_collection(geometries=None):
+    """Create a valid GeoJSON GeometryCollection."""
     return {
         "type": "GeometryCollection",
-        "geometries": [] if geometries is None else geometries
+        "geometries": [] if geometries is None else geometries,
     }
 
 
-def Feature(geometry=None, properties=None):
-    """ Create a valid GeoJSON Feature. """
+def feature(geometry=None, properties=None):
+    """Create a valid GeoJSON Feature."""
     return {
         "type": "Feature",
         "geometry": geometry,
-        "properties": properties
+        "properties": properties,
     }
 
 
-def FeatureCollection(features=None):
-    """ Create a valid GeoJSON FeatureCollection. """
+def feature_collection(features=None):
+    """Create a valid GeoJSON FeatureCollection."""
     return {
         "type": "FeatureCollection",
-        "features": [] if features is None else features
+        "features": [] if features is None else features,
     }
-

@@ -1,6 +1,7 @@
+"""Extract GeoJSON objects from other GeoJSON objects."""
 
 
-def positionsOf(geojson):
+def positions_of(geojson):
     """ Find all Positions in a valid GeoJSON object. """
     positions = []
     if geojson["type"] == "Point":
@@ -8,21 +9,30 @@ def positionsOf(geojson):
     elif geojson["type"] in ["MultiPoint", "LineString"]:
         positions += [position for position in geojson["coordinates"]]
     elif geojson["type"] in ["MultiLineString", "Polygon"]:
-        positions += [position for line_string in geojson["coordinates"] for position in line_string]
+        positions += [
+            position
+            for line_string in geojson["coordinates"]
+            for position in line_string
+        ]
     elif geojson["type"] == "MultiPolygon":
-        positions += [position for polygon in geojson["coordinates"] for line_string in polygon for position in line_string]
+        positions += [
+            position
+            for polygon in geojson["coordinates"]
+            for line_string in polygon
+            for position in line_string
+        ]
     elif geojson["type"] == "GeometryCollection":
         for geometry in geojson["geometries"]:
-            positions += positionsOf(geometry)
+            positions += positions_of(geometry)
     elif geojson["type"] == "Feature":
-        positions += positionsOf(geojson["geometry"])
+        positions += positions_of(geojson["geometry"])
     elif geojson["type"] == "FeatureCollection":
         for feature in geojson["features"]:
-            positions += positionsOf(feature)
+            positions += positions_of(feature)
     return positions
 
 
-def featuresOf(geojson):
+def features_of(geojson):
     """ Find all Features in a valid GeoJSON object. """
     features = []
     if geojson["type"] == "Feature":
@@ -32,18 +42,24 @@ def featuresOf(geojson):
     return features
 
 
-def geometriesOf(geojson):
+def geometries_of(geojson):
     """ Find all Geometries in a valid GeoJSON object. """
     geometries = []
-    if geojson["type"] in ["Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon"]:
+    if geojson["type"] in [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+    ]:
         geometries.append(geojson)
     elif geojson["type"] == "GeometryCollection":
         for geometry in geojson["geometries"]:
-            geometries += geometriesOf(geometry)
+            geometries += geometries_of(geometry)
     elif geojson["type"] == "Feature":
-        geometries += geometriesOf(geojson["geometry"])
+        geometries += geometries_of(geojson["geometry"])
     elif geojson["type"] == "FeatureCollection":
         for feature in geojson["features"]:
-            geometries += geometriesOf(feature)
+            geometries += geometries_of(feature)
     return geometries
-
