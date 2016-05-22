@@ -1,0 +1,19 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+branches:
+  only:
+    - master
+before_install:
+  - pip install --upgrade pip
+  - pip install pep8 pylint tox
+install:
+  - python setup.py sdist
+  - pip install ./dist/*
+script:
+  - tox
+  - pep8 gjtk setup.py
+  - pylint gjtk setup.py
