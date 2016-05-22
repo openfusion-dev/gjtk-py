@@ -286,7 +286,7 @@ def is_bbox(anything):
     """ Validate a GeoJSON Bounding Box. """
     if not isinstance(anything, list) or len(anything) < 1 or len(anything) % 2 != 0:
         return False
-    pivot = len(anything) / 2
+    pivot = int(len(anything) / 2)
     for i in range(pivot):
         if anything[i] > anything[i+pivot]:
             return False
