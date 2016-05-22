@@ -662,7 +662,7 @@ Modules
 |                                                         | ``False``        |
 +---------------------------------------------------------+------------------+
 
-.. |Build Status| image:: https://img.shields.io/codeship/68395630-1c40-0133-3824-627b75fb3d39/master.svg
-   :target: https://codeship.com/projects/94661
+.. |Build Status| image:: https://img.shields.io/travis/dmtucker/gjtk-py.svg
+   :target: https://travis-ci.org/dmtucker/gjtk-py
 .. |PyPI Version| image:: https://img.shields.io/pypi/v/gjtk.svg
    :target: https://pypi.python.org/pypi/gjtk
