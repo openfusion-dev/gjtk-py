@@ -15,7 +15,7 @@ with open('README.rst') as readme_file:
 
 setup(
     name='gjtk',
-    version='2.1.0',
+    version='3.0.0',
     description='GeoJSON ToolKit',
     long_description=README,
     author='David Tucker',
