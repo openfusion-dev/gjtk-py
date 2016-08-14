@@ -19,7 +19,7 @@ setup(
     description='GeoJSON ToolKit',
     long_description=README,
     author='David Tucker',
-    author_email='david.michael.tucker@gmail.com',
+    author_email='david@tucker.name',
     license='LGPLv2+',
     url='https://github.com/dmtucker/gjtk-py',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
