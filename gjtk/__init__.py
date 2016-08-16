@@ -1,6 +1,8 @@
 """GeoJSON ToolKit"""
 
-from . import extract
-from . import generate
-from . import random
-from . import validate
+from __future__ import absolute_import
+
+from gjtk import extract
+from gjtk import generate
+from gjtk import random
+from gjtk import validate

@@ -1,5 +1,7 @@
 """Tests for GeoJSON ToolKit Generation Utilities"""
 
+from __future__ import absolute_import
+
 import random
 import unittest
 

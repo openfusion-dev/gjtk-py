@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import random
 
-import gjtk
+import gjtk.generate
 
 
 def position(max_numbers=3, min_numbers=2):
