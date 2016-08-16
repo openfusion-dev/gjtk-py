@@ -4,25 +4,31 @@ from __future__ import absolute_import
 
 import random
 
+import pytest
+
 import gjtk.generate
 
 
+@pytest.fixture
 def position(max_numbers=3, min_numbers=2):
     """Generate a random GeoJSON Position."""
     assert min_numbers > 1, "There must be at least two elements, and may be more."
     return [(random.random()-0.5)*100 for _ in range(random.randint(min_numbers, max_numbers))]
 
 
+@pytest.fixture
 def point_coordinates():
     """Generate random coordinates for a GeoJSON Point."""
     return position()
 
 
+@pytest.fixture
 def multi_point_coordinates(max_positions=6, min_positions=0):
     """Generate random coordinates for a GeoJSON MultiPoint."""
     return [position() for _ in range(random.randint(min_positions, max_positions))]
 
 
+@pytest.fixture
 def line_string_coordinates(max_positions=6, min_positions=2):
     """Generate random coordinates for a GeoJSON LineString."""
     assert min_positions > 1, \
@@ -30,12 +36,14 @@ def line_string_coordinates(max_positions=6, min_positions=2):
     return [position() for _ in range(random.randint(min_positions, max_positions))]
 
 
+@pytest.fixture
 def linear_ring_coordinates():
     """Generate a random GeoJSON LinearRing."""
     origin = position()
     return [origin]+line_string_coordinates()+[origin]
 
 
+@pytest.fixture
 def multi_line_string_coordinates(max_line_strings=6, min_line_strings=1):
     """Generate random coordinates for a GeoJSON MultiLineString."""
     return [
@@ -44,6 +52,7 @@ def multi_line_string_coordinates(max_line_strings=6, min_line_strings=1):
     ]
 
 
+@pytest.fixture
 def polygon_coordinates():
     """Generate random coordinates for a GeoJSON Polygon."""
     quadrant = [
@@ -74,11 +83,13 @@ def polygon_coordinates():
     ]
 
 
+@pytest.fixture
 def multi_polygon_coordinates(max_polygons=6, min_polygons=1):
     """Generate random coordinates for a GeoJSON MultiPolygon."""
     return [polygon_coordinates() for _ in range(random.randint(min_polygons, max_polygons))]
 
 
+@pytest.fixture
 def geometry():
     """Generate a random GeoJSON Geometry."""
     return random.choice([
@@ -92,36 +103,43 @@ def geometry():
     ])()
 
 
+@pytest.fixture
 def point():
     """Generate a random GeoJSON Point."""
     return gjtk.generate.point(position=position())
 
 
+@pytest.fixture
 def multi_point():
     """Generate a random GeoJSON MultiPoint."""
     return gjtk.generate.multi_point(coordinates=multi_point_coordinates())
 
 
+@pytest.fixture
 def line_string():
     """Generate a random GeoJSON LineString."""
     return gjtk.generate.line_string(coordinates=line_string_coordinates())
 
 
+@pytest.fixture
 def multi_line_string():
     """Generate a random GeoJSON MultiLineString."""
     return gjtk.generate.multi_line_string(coordinates=multi_line_string_coordinates())
 
 
+@pytest.fixture
 def polygon():
     """Generate a random GeoJSON Polygon."""
     return gjtk.generate.polygon(coordinates=polygon_coordinates())
 
 
+@pytest.fixture
 def multi_polygon():
     """Generate a random GeoJSON MultiPolygon."""
     return gjtk.generate.multi_polygon(coordinates=multi_polygon_coordinates())
 
 
+@pytest.fixture
 def geometry_collection(max_geometries=3, min_geometries=0):
     """Generate a random GeoJSON GeometryCollection."""
     return gjtk.generate.geometry_collection(
@@ -129,6 +147,7 @@ def geometry_collection(max_geometries=3, min_geometries=0):
     )
 
 
+@pytest.fixture
 def feature():
     """Generate a random GeoJSON Feature."""
     return gjtk.generate.feature(
@@ -141,6 +160,7 @@ def feature():
     )
 
 
+@pytest.fixture
 def feature_collection(max_features=3, min_features=0):
     """Generate a random GeoJSON FeatureCollection."""
     return gjtk.generate.feature_collection(
@@ -148,6 +168,7 @@ def feature_collection(max_features=3, min_features=0):
     )
 
 
+@pytest.fixture
 def crs():
     """Generate a random GeoJSON Coordinate Reference System."""
     return {
@@ -161,6 +182,7 @@ def crs():
     }
 
 
+@pytest.fixture
 def link():
     """Generate a random GeoJSON Link."""
     new_link = {"href": "data.crs" if random.random() < 0.5 else "http://example.com/crs/42"}
@@ -169,6 +191,7 @@ def link():
     return new_link
 
 
+@pytest.fixture
 def bbox(max_dimensions=4, min_dimensions=2):
     """Generate a random GeoJSON Bounding Box."""
     lower_bounds = []
