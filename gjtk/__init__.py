@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 
+from gjtk import example
 from gjtk import extract
 from gjtk import generate
 from gjtk import random
