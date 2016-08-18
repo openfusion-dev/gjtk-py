@@ -190,6 +190,11 @@ def test_is_polygon(polygon):
     assert gjtk.validate.is_polygon(polygon)
 
 
+def test_is_polygon_malformed(malformed_polygon):
+    """should return false when provided a malformed Polygon"""
+    assert not gjtk.validate.is_polygon(malformed_polygon)
+
+
 def test_is_polygon_no_type(polygon_without_type):
     """should return false when provided a Polygon object without a type"""
     assert not gjtk.validate.is_polygon(polygon_without_type)
@@ -208,6 +213,11 @@ def test_is_polygon_invalid(types):
 def test_is_multi_polygon(multi_polygon):
     """should return true when provided a valid MultiPolygon object"""
     assert gjtk.validate.is_multi_polygon(multi_polygon)
+
+
+def test_is_multi_polygon_malformed(malformed_multi_polygon):
+    """should return false when provided a malformed MultiPolygon"""
+    assert not gjtk.validate.is_multi_polygon(malformed_multi_polygon)
 
 
 def test_is_multi_polygon_no_type(multi_polygon_without_type):
@@ -353,6 +363,11 @@ def test_is_bbox(bbox):
 def test_is_bbox_invalid(types):
     """should return false when provided an invalid object"""
     assert not gjtk.validate.is_bbox(types)
+
+
+def test_is_bbox_malformed(malformed_bbox):
+    """should return false when provided a malformed Bbox"""
+    assert not gjtk.validate.is_bbox(malformed_bbox)
 
 
 def test_has_bbox_geometry(geometry_with_bbox):

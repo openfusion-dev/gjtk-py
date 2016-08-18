@@ -2,7 +2,11 @@
 
 from __future__ import absolute_import
 
+import copy
+
 import pytest
+
+import gjtk.example
 
 # pylint: disable=unused-wildcard-import
 from gjtk.random import *  # pylint: disable=wildcard-import
@@ -148,9 +152,28 @@ def link_without_href(link):
 
 @pytest.fixture
 def link_without_type(link):
-    if 'type' in link:
-        del link['type']
+    link['type'] = None
+    del link['type']
     return link
+
+
+@pytest.fixture
+def malformed_bbox(bbox):
+    return [max(bbox[0], bbox[1]), min(bbox[0], bbox[1])]
+
+
+@pytest.fixture
+def malformed_polygon():
+    polygon = copy.deepcopy(gjtk.example.POLYGON_WITH_HOLE)
+    polygon['coordinates'] = [polygon['coordinates'][1], polygon['coordinates'][0]]
+    return polygon
+
+
+@pytest.fixture
+def malformed_multi_polygon(multi_polygon):
+    multi_polygon = copy.deepcopy(gjtk.example.MULTI_POLYGON)
+    del multi_polygon['coordinates'][0][0][0]
+    return multi_polygon
 
 
 @pytest.fixture
