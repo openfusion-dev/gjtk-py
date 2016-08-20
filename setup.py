@@ -28,7 +28,7 @@ setup(
     install_requires=[
         'matplotlib ~= 1.5',
     ],
-    entry_points={'console_scripts': ['gjtk = gjtk.__main__:main']},
+    entry_points={'console_scripts': ['gjtk = gjtk.cli:main']},
     keywords='GeoJSON',
     classifiers=[
         'License :: OSI Approved :: '
