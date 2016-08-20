@@ -13,15 +13,24 @@ def lint(args):
     """Validate GeoJSON files."""
     valid = 0
     for path in args.paths:
-        with open(path, 'r') as f:
-            anything = json.load(f)
         print(path + '... ', end='')
+        try:
+            with open(path, 'r') as f:
+                try:
+                    anything = json.load(f)
+                except json.decoder.JSONDecodeError:
+                    print('invalid')
+                    continue
+        except IOError as ex:
+            print('error', ex)
+            continue
         if gjtk.validate.is_geojson(anything):
             valid += 1
             print('valid')
         else:
             print('invalid')
     print(str(valid) + '/' + str(len(args.paths)) + ' valid GeoJSON files')
+    return len(args.paths) - valid
 
 
 def stat(args):
