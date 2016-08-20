@@ -303,7 +303,7 @@ class MultiLineStringCoordinatesTest(unittest.TestCase):
 
     """Tests for MultiLineString Coordinates Validation"""
 
-    def test_multi_line_string_coordinates(self):  # pylint: disable=invalid-name
+    def test_multi_line_string_coordinates(self):
         """should return true when provided valid GeoJSON MultiLineString coordinates"""
         test_data = gjtk.random.multi_line_string_coordinates()
         self.assertTrue(

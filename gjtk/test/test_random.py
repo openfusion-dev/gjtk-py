@@ -76,7 +76,7 @@ class MultiLineStringCoordinatesTest(unittest.TestCase):
 
     """Tests for Random MultiLineString Coordinates Generation"""
 
-    def test_multi_line_string_coordinates(self):  # pylint: disable=invalid-name
+    def test_multi_line_string_coordinates(self):
         """should return a valid MultiLineString coordinates"""
         test_data = gjtk.random.multi_line_string_coordinates()
         self.assertTrue(

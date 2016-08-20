@@ -88,7 +88,7 @@ def is_linear_ring_coordinates(anything):
 
 
 @boolean_fail
-def is_multi_line_string_coordinates(anything):  # pylint: disable=invalid-name
+def is_multi_line_string_coordinates(anything):
     """ Validate the coordinates of a GeoJSON MultiLineString. """
     return (
         isinstance(anything, list) and
