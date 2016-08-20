@@ -25,7 +25,9 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     include_package_data=True,
     test_suite="gjtk.test",
-    install_requires=['matplotlib'],
+    install_requires=[
+        'matplotlib ~= 1.5',
+    ],
     entry_points={'console_scripts': ['gjtk = gjtk.__main__:main']},
     keywords='GeoJSON',
     classifiers=[
