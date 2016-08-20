@@ -46,11 +46,7 @@ def stat(args):
             features += 1
             geometries += stat_feature(geojson)
         else:
-            assert gjtk.validate.is_geometry(geojson), \
-                'A valid GeoJSON object is not a' \
-                ' FeatureCollection, Feature, or Geometry!\n{0}'.format(
-                    gjtk.test.error_message(test_data=geojson),
-                )
+            assert gjtk.validate.is_geometry(geojson)
             geometries += stat_geometry(geojson)
     print(str(valid) + '/' + str(len(args.paths)) + ' valid GeoJSON files')
     print(str(feature_collections) + ' FeatureCollections')
