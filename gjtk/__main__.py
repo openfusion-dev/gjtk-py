@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import argparse
 import json
+import sys
 
 import gjtk
 
@@ -107,8 +108,8 @@ def main():
     stat_parser.set_defaults(func=stat)
 
     args = parser.parse_args()
-    args.func(args)
+    return args.func(args)
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
