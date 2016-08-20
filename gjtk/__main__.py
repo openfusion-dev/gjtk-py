@@ -1,11 +1,10 @@
-"""GJTK CLI Interface"""
+"""GJTK Default Interface"""
 
 from __future__ import absolute_import
 from __future__ import print_function
 
 import argparse
 import json
-import sys
 
 import gjtk
 
@@ -16,7 +15,7 @@ def lint(args):
     for path in args.paths:
         with open(path, 'r') as f:
             anything = json.load(f)
-        sys.stdout.write(path+'... ')
+        print(path + '... ', end='')
         if gjtk.validate.is_geojson(anything):
             valid += 1
             print('valid')
