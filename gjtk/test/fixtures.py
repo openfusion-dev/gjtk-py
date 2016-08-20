@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 
 import copy
+import random
 
 import pytest
 
@@ -18,17 +19,17 @@ from gjtk.random import *  # pylint: disable=wildcard-import
 
 @pytest.fixture
 def immutable():
-    return (), None, True, 0, ''
+    return random.choice(((), None, True, 0, ''))
 
 
 @pytest.fixture
 def mutable():
-    return ([], {}, object, lambda x: x)
+    return random.choice(([], {}, object, lambda x: x))
 
 
 @pytest.fixture
 def types(immutable, mutable):
-    return immutable + mutable
+    return random.choice((immutable, mutable))
 
 
 # GeoJSON
@@ -129,7 +130,7 @@ def geometry_collection_without_type(geometry_collection):
 
 @pytest.fixture
 def invalid_position(types):
-    return types + ([1], ['foo', 'bar'], [1, 'a'])
+    return (types, [1], ['foo', 'bar'], [1, 'a'])
 
 
 @pytest.fixture
