@@ -12,8 +12,10 @@ import gjtk
 def lint(args):
     """Validate GeoJSON files."""
     valid = 0
+    len_longest_path = max(map(len, args.paths))
     for path in args.paths:
-        print(path + '... ', end='')
+        pad = ' ' * (len_longest_path - len(path))
+        print(path + pad, end='\t')
         try:
             with open(path, 'r') as f:
                 try:
@@ -29,7 +31,7 @@ def lint(args):
             print('valid')
         else:
             print('invalid')
-    print(str(valid) + '/' + str(len(args.paths)) + ' valid GeoJSON files')
+    print(str(valid) + '/' + str(len(args.paths)), 'valid GeoJSON files')
     return len(args.paths) - valid
 
 
