@@ -9,91 +9,78 @@ import gjtk.extract
 import gjtk.validate
 
 
+def normalized(mutable):
+    """Make mutable types comparable."""
+    return collections.Counter(map(tuple, mutable))
+
+
 # POSITIONS
 
 
 def test_positions_of_point():
     """should return valid positions when provided a valid Point"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.POINT),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.POINT)) ==
+        normalized([
             [100.0, 0.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_multi_point():
     """should return valid positions when provided a valid MultiPoint"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.MULTI_POINT),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.MULTI_POINT)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 1.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_line_string():
     """should return valid positions when provided a valid LineString"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.LINE_STRING),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.LINE_STRING)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 1.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_multi_line_string():
     """should return valid positions when provided a valid MultiLineString"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.MULTI_LINE_STRING),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.MULTI_LINE_STRING)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 1.0],
             [102.0, 2.0],
             [103.0, 3.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_polygon_without_hole():
     """should return valid positions when provided a valid Polygon"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.POLYGON_WITHOUT_HOLE),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.POLYGON_WITHOUT_HOLE)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 0.0],
             [101.0, 1.0],
             [100.0, 1.0],
             [100.0, 0.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_polygon_with_hole():
     """should return valid positions when provided a valid Polygon"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.POLYGON_WITH_HOLE),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.POLYGON_WITH_HOLE)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 0.0],
             [101.0, 1.0],
@@ -104,18 +91,15 @@ def test_positions_of_polygon_with_hole():
             [100.8, 0.8],
             [100.2, 0.8],
             [100.2, 0.2],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_multi_polygon():
     """should return valid positions when provided a valid MultiPolygon"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.MULTI_POLYGON),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.MULTI_POLYGON)) ==
+        normalized([
             [102.0, 2.0],
             [103.0, 2.0],
             [103.0, 3.0],
@@ -131,46 +115,37 @@ def test_positions_of_multi_polygon():
             [100.8, 0.8],
             [100.2, 0.8],
             [100.2, 0.2],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_geometry_collection():
     """should return valid positions when provided a valid GeometryCollection"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.GEOMETRY_COLLECTION),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.GEOMETRY_COLLECTION)) ==
+        normalized([
             [100.0, 0.0],
             [101.0, 0.0],
             [102.0, 1.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_feature():
     """should return valid positions when provided a valid Feature"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.FEATURE),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.FEATURE)) ==
+        normalized([
             [125.6, 10.1],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_feature_collection():
     """should return valid positions when provided a valid FeatureCollection"""
-    assert collections.Counter(map(
-        str,
-        gjtk.extract.positions_of(gjtk.example.FEATURE_COLLECTION),
-    )) == collections.Counter(map(
-        str,
-        [
+    assert (
+        normalized(gjtk.extract.positions_of(gjtk.example.FEATURE_COLLECTION)) ==
+        normalized([
             [102.0, 0.5],
             [102.0, 0.0],
             [103.0, 1.0],
@@ -181,8 +156,8 @@ def test_positions_of_feature_collection():
             [101.0, 1.0],
             [100.0, 1.0],
             [100.0, 0.0],
-        ],
-    ))
+        ])
+    )
 
 
 def test_positions_of_geojson(geojson):
