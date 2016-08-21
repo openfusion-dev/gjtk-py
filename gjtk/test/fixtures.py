@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 
 import copy
+import json
 import random
 
 import pytest
@@ -111,6 +112,14 @@ def geojson():
 
 
 @pytest.fixture
+def geojson_file(tmpdir, geojson):
+    f = tmpdir.join('test.geojson')
+    with f.open('w') as tmpfile:
+        json.dump(geojson, tmpfile)
+    return str(f)
+
+
+@pytest.fixture
 def geometry_with_crs(geometry, crs):
     geometry['crs'] = crs
     return geometry
@@ -131,6 +140,14 @@ def geometry_collection_without_type(geometry_collection):
 @pytest.fixture
 def invalid_position(types):
     return (types, [1], ['foo', 'bar'], [1, 'a'])
+
+
+@pytest.fixture
+def json_file(tmpdir):
+    f = tmpdir.join('test.json')
+    with f.open('w') as tmpfile:
+        json.dump({'not': 'geojson'}, tmpfile)
+    return str(f)
 
 
 @pytest.fixture
@@ -235,6 +252,14 @@ def polygon_without_coordinates(polygon):
 def polygon_without_type(polygon):
     del polygon['type']
     return polygon
+
+
+@pytest.fixture
+def text_file(tmpdir):
+    f = tmpdir.join('test.txt')
+    with f.open('w'):
+        f.write('not json')
+    return str(f)
 
 
 @pytest.fixture

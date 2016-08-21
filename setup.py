@@ -22,10 +22,10 @@ setup(
     author_email='david@tucker.name',
     license='LGPLv2+',
     url='https://github.com/dmtucker/gjtk-py',
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    packages=find_packages(),
     include_package_data=True,
-    test_suite="gjtk.test",
     install_requires=[
+        'decorator ~= 4.0',
         'matplotlib ~= 1.5',
     ],
     entry_points={'console_scripts': ['gjtk = gjtk.cli:main']},
