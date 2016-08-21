@@ -5,14 +5,6 @@ python:
   - "3.5"
 branches:
   only:
-    - master
-before_install:
-  - pip install --upgrade pip
-  - pip install pep8 pylint tox-travis
-install:
-  - python setup.py sdist
-  - pip install ./dist/*
-script:
-  - tox
-  - pep8 gjtk setup.py
-  - pylint gjtk setup.py
+  - master
+install: pip install tox-travis
+script: tox
