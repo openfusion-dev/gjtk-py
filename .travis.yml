@@ -8,7 +8,7 @@ branches:
     - master
 before_install:
   - pip install --upgrade pip
-  - pip install pep8 pylint tox
+  - pip install pep8 pylint tox-travis
 install:
   - python setup.py sdist
   - pip install ./dist/*
