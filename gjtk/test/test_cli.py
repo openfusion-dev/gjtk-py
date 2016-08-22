@@ -11,7 +11,7 @@ import decorator
 import gjtk.cli
 
 
-def exit_with_status(expr=None):
+def exit_with_status(comp=None):
     """
     Expect a test to raise a SystemExit, optionally with a code that satisfies the given expression.
     """
@@ -22,11 +22,8 @@ def exit_with_status(expr=None):
             try:
                 assert test_func(*args, **kwargs) and False
             except SystemExit as exc:
-                assert (
-                    True
-                    if expr is None else
-                    eval(str(exc.code) + expr)  # pylint: disable=eval-used
-                )
+                expr = str(exc.code) + ' ' + comp
+                assert True if comp is None else eval(expr), expr  # pylint: disable=eval-used
         return decorator.decorator(_decorated, test_func)
     return _decorator
 
