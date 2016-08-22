@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Tests for gjtk.cli"""
 
 from __future__ import absolute_import
@@ -51,6 +53,12 @@ def test_nonexistent_file(tmpdir):
 def test_non_file(tmpdir):
     """Test invocation with a directory."""
     gjtk.cli.main(argv=[str(tmpdir)])
+
+
+@exit_with_status('!= 0')
+def test_incorrect_encoding(non_utf8_file):
+    """Test invocation with a non-UTF-8 file."""
+    gjtk.cli.main(argv=[non_utf8_file])
 
 
 @exit_with_status('!= 0')

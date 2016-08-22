@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """GeoJSON ToolKit"""
 
 from __future__ import absolute_import

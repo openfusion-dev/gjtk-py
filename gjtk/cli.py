@@ -1,7 +1,11 @@
+# coding: utf-8
+
 """This module defines the GJTK CLI."""
 
 from __future__ import absolute_import
 from __future__ import print_function
+
+from io import open  # pylint: disable=redefined-builtin
 
 import argparse
 import json
@@ -34,7 +38,7 @@ def main(argv=None):
         pad = ' ' * (len_longest_path - len(path))
         print(path + pad, end='\t')
         try:
-            with open(path, 'r') as f:
+            with open(path, 'r', encoding='utf-8') as f:
                 valid_json = json.load(f)
         except IOError as ex:
             print('error', ex)

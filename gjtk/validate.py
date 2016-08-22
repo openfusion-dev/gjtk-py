@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Validate GeoJSON objects."""
 
 from __future__ import absolute_import

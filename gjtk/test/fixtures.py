@@ -1,10 +1,14 @@
+# coding: utf-8
+
 """Pytest Fixtures"""
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import copy
 import json
 import random
+import sys
 
 import pytest
 
@@ -122,7 +126,8 @@ def geojson():
 def geojson_file(tmpdir, geojson):
     """a file that contains valid GeoJSON"""
     f = tmpdir.join('test.geojson')
-    with f.open('w') as tmpfile:
+    args, kwargs = (['w'], {'encoding': 'utf-8'}) if sys.version_info.major > 2 else (['wb'], {})
+    with f.open(*args, **kwargs) as tmpfile:
         json.dump(geojson, tmpfile)
     return str(f)
 
@@ -165,7 +170,8 @@ def invalid_position(types):
 def json_file(tmpdir):
     """a file that contains valid JSON that is not GeoJSON"""
     f = tmpdir.join('test.json')
-    with f.open('w') as tmpfile:
+    args, kwargs = (['w'], {'encoding': 'utf-8'}) if sys.version_info.major > 2 else (['wb'], {})
+    with f.open(*args, **kwargs) as tmpfile:
         json.dump({'not': 'geojson'}, tmpfile)
     return str(f)
 
@@ -264,6 +270,15 @@ def multi_polygon_without_type(multi_polygon):
 
 
 @pytest.fixture
+def non_utf8_file(tmpdir):
+    """a file that is not UTF-8 encoded"""
+    f = tmpdir.join('test.txt')
+    with f.open('w', encoding='big5') as tmpfile:
+        tmpfile.write('漢字')
+    return str(f)
+
+
+@pytest.fixture
 def point_without_coordinates(point):
     """a GeoJSON Point without a coordinates key"""
     del point['coordinates']
@@ -295,8 +310,8 @@ def polygon_without_type(polygon):
 def text_file(tmpdir):
     """a file that does not contain valid JSON"""
     f = tmpdir.join('test.txt')
-    with f.open('w'):
-        f.write('not json')
+    with f.open('w', encoding='ascii') as tmpfile:
+        tmpfile.write('plaintext')
     return str(f)
 
 

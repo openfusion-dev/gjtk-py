@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Tests for gjtk.extract"""
 
 from __future__ import absolute_import
