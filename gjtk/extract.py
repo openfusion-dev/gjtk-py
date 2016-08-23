@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Extract GeoJSON objects from other GeoJSON objects."""
 
 
