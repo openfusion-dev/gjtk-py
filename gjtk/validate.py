@@ -14,7 +14,7 @@ def boolean_fail(f):
         """Return False if an exception is raised."""
         try:
             return f(*args, **kwargs)
-        except:  # pylint: disable=bare-except
+        except Exception:  # pylint: disable=broad-except
             return False
     return wrapped_f
 
