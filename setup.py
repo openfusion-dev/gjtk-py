@@ -24,6 +24,7 @@ setup(
     url='https://github.com/dmtucker/gjtk-py',
     packages=find_packages(),
     include_package_data=True,
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,<4',
     install_requires=[
         'decorator ~= 4.0',
         'matplotlib ~= 1.5',
@@ -40,6 +41,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries',
         'Development Status :: 5 - Production/Stable',
     ],
