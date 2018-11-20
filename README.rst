@@ -5,7 +5,7 @@ GeoJSON ToolKit
 
 |Build Status| |Test Coverage| |PyPI Version|
 
-.. |Build Status| image:: https://img.shields.io/travis/openfusion-dev/gjtk-py.svg
+.. |Build Status| image:: https://img.shields.io/travis/com/openfusion-dev/gjtk-py.svg
    :target: https://travis-ci.com/openfusion-dev/gjtk-py
 .. |Test Coverage| image:: https://img.shields.io/coveralls/openfusion-dev/gjtk-py.svg
    :target: https://coveralls.io/github/openfusion-dev/gjtk-py
