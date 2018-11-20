@@ -5,6 +5,13 @@ GeoJSON ToolKit
 
 |Build Status| |Test Coverage| |PyPI Version|
 
+.. |Build Status| image:: https://img.shields.io/travis/openfusion-dev/gjtk-py.svg
+   :target: https://travis-ci.com/openfusion-dev/gjtk-py
+.. |Test Coverage| image:: https://img.shields.io/coveralls/openfusion-dev/gjtk-py.svg
+   :target: https://coveralls.io/github/openfusion-dev/gjtk-py
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/gjtk.svg
+   :target: https://pypi.python.org/pypi/gjtk
+
 Installation
 ------------
 
@@ -210,10 +217,3 @@ General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with this library; if not, write to the Free Software Foundation,
 Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-
-.. |Build Status| image:: https://img.shields.io/travis/dmtucker/gjtk-py.svg
-   :target: https://travis-ci.org/dmtucker/gjtk-py
-.. |Test Coverage| image:: https://img.shields.io/coveralls/dmtucker/gjtk-py.svg
-   :target: https://coveralls.io/github/dmtucker/gjtk-py
-.. |PyPI Version| image:: https://img.shields.io/pypi/v/gjtk.svg
-   :target: https://pypi.python.org/pypi/gjtk
