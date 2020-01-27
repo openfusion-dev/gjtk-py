@@ -27,8 +27,8 @@ setup(
         'setuptools-scm >= 3.3',
     ],
     install_requires=[
-        'decorator ~= 4.0',
-        'matplotlib ~= 1.5',
+        'decorator >= 4.0',
+        'matplotlib >= 1.5',
     ],
     entry_points={'console_scripts': ['gjtk = gjtk.cli:main']},
     keywords='GeoJSON',
