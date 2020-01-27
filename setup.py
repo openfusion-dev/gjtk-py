@@ -19,7 +19,8 @@ setup(
     author_email='dmtucker@ucsc.edu',
     license='LGPLv2+',
     url='https://github.com/openfusion-dev/gjtk-py',
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     include_package_data=True,
     python_requires='>= 3.5',
     install_requires=[
