@@ -36,9 +36,6 @@ setup(
         'License :: OSI Approved :: '
         'GNU Lesser General Public License v2 or later (LGPLv2+)',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries',
         'Development Status :: 5 - Production/Stable',
     ],
