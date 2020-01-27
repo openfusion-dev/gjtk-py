@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
 """A setuptools based setup module.
 
 See:
@@ -24,7 +21,7 @@ setup(
     url='https://github.com/openfusion-dev/gjtk-py',
     packages=find_packages(),
     include_package_data=True,
-    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,<4',
+    python_requires='>= 3.5',
     install_requires=[
         'decorator ~= 4.0',
         'matplotlib ~= 1.5',
@@ -37,10 +34,7 @@ setup(
         'License :: OSI Approved :: '
         'GNU Lesser General Public License v2 or later (LGPLv2+)',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries',

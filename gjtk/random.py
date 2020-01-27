@@ -1,8 +1,4 @@
-# coding: utf-8
-
 """Generate random GeoJSON elements."""
-
-from __future__ import absolute_import
 
 import random
 
