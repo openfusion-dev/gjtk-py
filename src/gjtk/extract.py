@@ -7,7 +7,7 @@ def positions_of(geojson):
     if geojson["type"] == "Point":
         positions.append(geojson["coordinates"])
     elif geojson["type"] in ["MultiPoint", "LineString"]:
-        positions += [position for position in geojson["coordinates"]]
+        positions += geojson["coordinates"]
     elif geojson["type"] in ["MultiLineString", "Polygon"]:
         positions += [
             position

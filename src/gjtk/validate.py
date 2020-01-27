@@ -1,7 +1,7 @@
 """Validate GeoJSON objects."""
 
 from numbers import Number
-from matplotlib.path import Path
+from matplotlib.path import Path  # type: ignore
 
 
 def boolean_fail(f):

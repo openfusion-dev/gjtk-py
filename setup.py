@@ -5,7 +5,7 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages  # type: ignore
 
 with open('README.rst') as readme_file:
     README = readme_file.read()
