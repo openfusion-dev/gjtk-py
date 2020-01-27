@@ -12,7 +12,7 @@ with open('README.rst') as readme_file:
 
 setup(
     name='gjtk',
-    version='3.0.0',
+    use_scm_version=True,
     description='GeoJSON ToolKit',
     long_description=README,
     author='David Tucker',
@@ -23,6 +23,9 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     python_requires='>= 3.5',
+    setup_requires=[
+        'setuptools-scm >= 3.3',
+    ],
     install_requires=[
         'decorator ~= 4.0',
         'matplotlib ~= 1.5',
