@@ -25,8 +25,6 @@ setup(
     install_requires=[
         'decorator ~= 4.0',
         'matplotlib ~= 1.5',
-        'attrs < 19.2.0',  # https://github.com/pytest-dev/pytest/issues/3223
-        'pytest ~= 3.3.1',
     ],
     entry_points={'console_scripts': ['gjtk = gjtk.cli:main']},
     keywords='GeoJSON',
