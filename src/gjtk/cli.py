@@ -1,11 +1,4 @@
-# coding: utf-8
-
 """This module defines the GJTK CLI."""
-
-from __future__ import absolute_import
-from __future__ import print_function
-
-from io import open  # pylint: disable=redefined-builtin
 
 import argparse
 import json

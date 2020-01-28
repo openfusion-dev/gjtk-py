@@ -1,8 +1,4 @@
-# coding: utf-8
-
 """Tests for gjtk.extract"""
-
-from __future__ import absolute_import
 
 import collections
 
@@ -165,7 +161,7 @@ def test_positions_of_feature_collection():
 def test_positions_of_geojson(geojson):
     """should return valid positions when provided any valid GeoJSON"""
     assert all(
-        gjtk.validate.is_position(position) for position in gjtk.extract.positions_of(geojson),
+        gjtk.validate.is_position(position) for position in gjtk.extract.positions_of(geojson)
     )
 
 
@@ -235,7 +231,7 @@ def test_geometries_of_feature_collection():
 def test_geometries_of_geojson(geojson):
     """should return valid geometries when provided any valid GeoJSON"""
     assert all(
-        gjtk.validate.is_geometry(position) for position in gjtk.extract.geometries_of(geojson),
+        gjtk.validate.is_geometry(position) for position in gjtk.extract.geometries_of(geojson)
     )
 
 
@@ -255,5 +251,5 @@ def test_features_of_feature_collection(feature_collection):
 def test_features_of_geojson(geojson):
     """should return valid features when provided any valid GeoJSON"""
     assert all(
-        gjtk.validate.is_feature(position) for position in gjtk.extract.features_of(geojson),
+        gjtk.validate.is_feature(position) for position in gjtk.extract.features_of(geojson)
     )

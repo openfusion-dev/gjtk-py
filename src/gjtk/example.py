@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """GeoJSON Examples from the Specification"""
 
 POINT = {

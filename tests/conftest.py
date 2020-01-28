@@ -1,9 +1,4 @@
-# coding: utf-8
-
 """Pytest Fixtures"""
-
-from __future__ import absolute_import
-from __future__ import unicode_literals
 
 import copy
 import json
@@ -13,6 +8,7 @@ import sys
 import pytest
 
 import gjtk.example
+import gjtk.random
 
 # Pytest fixtures can rely on other fixtures.
 # pylint: disable=redefined-outer-name
@@ -321,3 +317,12 @@ def unequal_positions(position):
     position2 = list(position)
     position2[0] = position[0] + 1
     return position, position2
+
+
+# Make functions in gjtk.random fixtures:
+for name in dir(gjtk.random):
+    if name.startswith('_'):
+        continue
+    attr = getattr(gjtk.random, name)
+    if callable(attr):
+        globals()[name] = pytest.fixture(attr, name=name)
