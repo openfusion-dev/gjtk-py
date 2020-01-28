@@ -3,10 +3,8 @@ GeoJSON ToolKit
 
 ``gjtk`` is a library for working with `GeoJSON`_. It aims to be as compliant with the specification (soon `standard`_, hopefully) as possible.
 
-|Build Status| |PyPI Version|
+|PyPI Version|
 
-.. |Build Status| image:: https://img.shields.io/travis/com/openfusion-dev/gjtk-py.svg
-   :target: https://travis-ci.com/openfusion-dev/gjtk-py
 .. |PyPI Version| image:: https://img.shields.io/pypi/v/gjtk.svg
    :target: https://pypi.python.org/pypi/gjtk
 
